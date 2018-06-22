@@ -3,12 +3,17 @@ Adaptado de @villares: https://github.com/arteprog/quatro-encontros/blob/master/
 Adaptado de The Nature of Code, Daniel Shiffman http://natureofcode.com
 """
 
-PLAY = True
 CELL_SIZE = 4
+
+def init():
+    """ fill board with random values 0 or 1 """
+    for i in range(COLS):
+        for j in range(ROWS):
+            BOARD[i][j] = int(random(2))
 
 def setup():
     global COLS, ROWS, BOARD, quadrant_times
-    
+    # initialize noise time for each quadrant
     quadrant_times = [0, 0.3, 0.6, 0.9]
     
     size(600, 400)
@@ -22,6 +27,7 @@ def setup():
     background(0);
 
 def get_quadrand_point(q_index):
+    "Given the quadrant index, return the x, y coordinates for its point"
     global quadrant_times
     
     x = width / 2 * noise(quadrant_times[q_index])
@@ -35,7 +41,6 @@ def get_quadrand_point(q_index):
     return x, y
 
 def draw():
-    """ display the board, and if PLAY is true, call generate() """
     global quadrant_times
     
     fill(0, 35)
@@ -48,48 +53,26 @@ def draw():
                 continue
          
             x, y = i * CELL_SIZE, j * CELL_SIZE            
-            quadrant_index = 0
+            quadrant_index = 0 
             if x > width / 2:
                 quadrant_index += 1
-        
             if y > height / 2:
                 quadrant_index += 2
         
             qx, qy = get_quadrand_point(quadrant_index)
-
             if frameCount > 10:
                 stroke((255 + x * y) % 255, 180, 0, 90)
-                line(qx, qy, x, y)
-                line(px, py, x, y)            
+                line(qx, qy, x, y)  # line from previous cell to current
+                line(px, py, x, y)  # line from quadrant position to current          
             px, py = x, y 
-    if (PLAY):
-        generate()
+
+    generate()
         
     quadrant_times[0] += 0.01
-    quadrant_times[1] += 0.02
-    quadrant_times[2] += 0.02
+    quadrant_times[1] += 0.035
+    quadrant_times[2] += 0.035
     quadrant_times[3] += 0.01
-    
-    if frameCount > 10:
-        println(frameCount)
-        saveFrame()
 
-def keyPressed():
-    """
-    Reset board when 'r' is pressed
-    Pause/Play when SPACE BAR is pressed
-    """
-    global PLAY
-    if (key == ' '):
-        PLAY =  not PLAY
-    if (key == 'r'):
-        init()
-
-def init():
-    """ fill board with random values 0 or 1 """
-    for i in range(COLS):
-        for j in range(ROWS):
-            BOARD[i][j] = int(random(2))
 
 def generate():
     """ The process of creating the new generation """
