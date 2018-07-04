@@ -1,8 +1,6 @@
 from random import choice
 
 GRID_SIZE = 40
-SKETCH_NAME = "s177"
-OUTPUT = ".gif"
 
 class Cell(object):
 
@@ -19,7 +17,7 @@ class Cell(object):
     @property
     def y(self):
         return self.border + self.spacing / 2 + self.index_y * self.spacing
-    
+
     @property
     def line_color(self):
         if not self._line_color:

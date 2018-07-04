@@ -1,8 +1,6 @@
 from random import choice
 
 GRID_SIZE = 40
-SKETCH_NAME = "s177"
-OUTPUT = ".gif"
 
 class Cell(object):
 
