@@ -28,14 +28,13 @@ COLORS = [
 ]
 
 def setup():
-    size(1400, 1000)
-    #fullScreen()
+    size(1200, 1000)
     background(0)
     strokeWeight(5)
     strokeCap(ROUND)
-    global points_4, points_5, points_6, live_lines, radis
+    global points_4, points_5, points_6, live_lines, radis, direction
     frameRate(8)
-    radis = 45
+    direction = 1
     
     points_4, points_5, points_6, live_lines = [], [], [], []    
     hilbert(points_4, 0, 0, width / 2, 0, 0, height / 2, 4)
@@ -43,17 +42,18 @@ def setup():
     hilbert(points_6, 0, 0, width / 2, 0, 0, height / 2, 6)
     
 def draw():
-    global points_4, points_5, points_6, radis, live_lines
+    global points_4, points_5, points_6, radis, live_lines, direction
     
     noStroke()
     fill(0, 0, 0, 180)
     rect(0, 0, width, height)
             
-    if frameCount % 3:
+    if frameCount % 5:
         points = choice([points_4, points_5, points_6])
         print(len(live_lines))
         if len(live_lines) > 200:
             live_lines = []
+            direction *= -1
         colors = choice(COLORS)
         live_lines.append(ContinuousLine(points, colors=colors))    
         
@@ -62,7 +62,6 @@ def draw():
     noStroke()
     for c_line in live_lines:
         c_line.display()
-        rotate(frameCount % 365 * 0.01)            
+        rotate(frameCount % 365 * 0.01 * direction)            
             
     popMatrix()
-    saveFrame("crazy-{}.png".format(frameCount))
