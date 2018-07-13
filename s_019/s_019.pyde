@@ -16,7 +16,7 @@ def setup():
     
     size(1000, 600)
     background(0)
-    frameRate(80)
+    frameRate(6)
     
     stars_coords = []
     for y in range(10, height / 2 - 10):
@@ -36,23 +36,22 @@ def draw():
     rect(0, height / 2 - 5, width, height)
         
     sea_lines = []
-    for i ,y in enumerate(range(height / 2, height, 10)):
-        t = float(frameCount) / 100 + float(i) / 10
-        y = y + map(noise(t), 0, 1, -5, 5)
+    for y in range(height / 2, height, 10):
+        y = map(noise(y + frameCount * 0.3), 0, 1, y-5, y+5)
         sea_lines.append((0, y, width, y))
     
     wave_colors = [
-        (0, 136, 160, 60), # GREEN
-        (0, 136, 160, 60),
-        (9, 138, 255, 60), # BLUE
-        (9, 138, 255, 60),
-        (9, 138, 255, 60),
+        (0, 136, 160, 100), # GREEN
+        (0, 136, 160, 100),
+        (9, 138, 255, 100), # BLUE
+        (9, 138, 255, 100),
+        (9, 138, 255, 100),
     ]
     strokeWeight(3)
-    for i, wave in enumerate(sea_lines):
+    for wave in sea_lines:
         sx, sy, ex, ey = wave
-        curve_line = CurveLine((sx, sy), (ex, ey))
-        curve_line.display(width / 100, choice(wave_colors))
+        curve_line = CurveLine((sx, sy), (ex, ey), 5)
+        curve_line.display(10, choice(wave_colors))
       
     stroke(250, 226, 206, 130)
     for star in stars:
