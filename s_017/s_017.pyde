@@ -1,3 +1,6 @@
+# Author: Berin
+# Sketches repo: https://github.com/berinhard/sketches
+
 def setup():
     size(800, 800)
     colorMode(HSB, 360, 100, 100)
@@ -21,16 +24,16 @@ def draw():
         rotate(radians(frameCount / 3))
         rotate(radians(c))
         arc(
-            map(diff_x, 0, 1, 0, 20), 
-            map(diff_y, 0, 1, 80, 110), 
-            600, 500, 
-            0, 
-            PI / 24, 
+            map(diff_x, 0, 1, 0, 20),
+            map(diff_y, 0, 1, 80, 110),
+            600, 500,
+            0,
+            PI / 24,
             PIE
         )
         popMatrix()
-        
-    pushMatrix()    
+
+    pushMatrix()
     translate(height / 2, width / 2)
     fill(color(0, 80, 60))
     ellipse(0, 0, map(diff_x, 0, 1, 90, 110), map(diff_y, 0, 1, 90, 110))

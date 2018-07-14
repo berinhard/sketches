@@ -1,4 +1,7 @@
-float x, y; 
+// Author: Berin
+// Sketches repo: https://github.com/berinhard/sketches
+
+float x, y;
 float px, py;
 float tempoX = 0;
 float tempoY = 10;

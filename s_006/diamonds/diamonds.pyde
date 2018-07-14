@@ -1,3 +1,6 @@
+# Author: Berin
+# Sketches repo: https://github.com/berinhard/sketches
+
 class NoiseWave:
     """
     Class to enable noise increment propagation through an array

@@ -1,3 +1,6 @@
+# Author: Berin
+# Sketches repo: https://github.com/berinhard/sketches
+
 import math
 from random import choice
 
@@ -57,7 +60,7 @@ def draw():
     noStroke()
     fill(0, 200)
     rect(0, 0, width, height)
-    
+
     if frameCount % 5:
         points = choice([points_4, points_5, points_6, points_7])
         print(len(live_lines))

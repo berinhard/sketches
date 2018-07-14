@@ -1,3 +1,6 @@
+# Author: Berin
+# Sketches repo: https://github.com/berinhard/sketches
+
 """
 Adaptado de @villares: https://github.com/arteprog/quatro-encontros/blob/master/gameOfLife01_py/gameOfLife01_py.pyde
 Adaptado de The Nature of Code, Daniel Shiffman http://natureofcode.com
@@ -15,7 +18,7 @@ def setup():
     global COLS, ROWS, BOARD, quadrant_times
     # initialize noise time for each quadrant
     quadrant_times = [0, 0.3, 0.6, 0.9]
-    
+
     size(600, 400)
     # Initialize ROWS, COLS and set-up arrays
     COLS = width / CELL_SIZE
@@ -29,20 +32,20 @@ def setup():
 def get_quadrand_point(q_index):
     "Given the quadrant index, return the x, y coordinates for its point"
     global quadrant_times
-    
+
     x = width / 2 * noise(quadrant_times[q_index])
     y = height / 4  * noise(quadrant_times[q_index - 2])
     if q_index in [2, 3]:
         y += height / 2
-        
+
     if q_index in [1, 3]:
         x += width / 2
-        
+
     return x, y
 
 def draw():
     global quadrant_times
-    
+
     fill(0, 35)
     stroke(0)
     rect(0, 0, width, height)
@@ -51,23 +54,23 @@ def draw():
         for i in range(COLS):
             if not BOARD[i][j]:
                 continue
-         
-            x, y = i * CELL_SIZE, j * CELL_SIZE            
-            quadrant_index = 0 
+
+            x, y = i * CELL_SIZE, j * CELL_SIZE
+            quadrant_index = 0
             if x > width / 2:
                 quadrant_index += 1
             if y > height / 2:
                 quadrant_index += 2
-        
+
             qx, qy = get_quadrand_point(quadrant_index)
             if frameCount > 10:
                 stroke((255 + x * y) % 255, 180, 0, 90)
                 line(qx, qy, x, y)  # line from previous cell to current
-                line(px, py, x, y)  # line from quadrant position to current          
-            px, py = x, y 
+                line(px, py, x, y)  # line from quadrant position to current
+            px, py = x, y
 
     generate()
-        
+
     quadrant_times[0] += 0.01
     quadrant_times[1] += 0.035
     quadrant_times[2] += 0.035

@@ -1,3 +1,6 @@
+# Author: Berin
+# Sketches repo: https://github.com/berinhard/sketches
+
 from random import choice
 
 GRID_SIZE = 40
@@ -17,11 +20,11 @@ class Cell(object):
     @property
     def y(self):
         return self.border + self.spacing / 2 + self.index_y * self.spacing
-    
+
     @property
     def belongs_to_odd_line(self):
         return bool(self.line_num % 2)
-    
+
     @property
     def line_num(self):
         return int(self.index_y / 8)
@@ -43,12 +46,12 @@ class Cell(object):
         return self.x == cell.x and self.y == cell.y
 
     def neighbors(self, grid_size):
-        if self.belongs_to_odd_line: 
+        if self.belongs_to_odd_line:
             x_range = [1]
             y_range = [0, 1]
         else:
             x_range = [0, 1]
-            y_range = [1] 
+            y_range = [1]
 
         if 0 < self.index_x < grid_size:
             x_range.append(-1)
@@ -103,7 +106,7 @@ class Maze(object):
             others_to_visit = [c for c in self.unvisited_cells if c.line_num != self.current_cell.line_num]
             if others_to_visit:
                 self.current_cell = choice(others_to_visit)
-            else:            
+            else:
                 self.current_cell = choice(self.unvisited_cells)
             self.current_path_length = 0
             return

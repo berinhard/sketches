@@ -1,3 +1,6 @@
+# Author: Berin
+# Sketches repo: https://github.com/berinhard/sketches
+
 import math
 
 def hilbert(points, x0, y0, xi, xj, yi, yj, n):
@@ -7,14 +10,14 @@ def hilbert(points, x0, y0, xi, xj, yi, yj, n):
     if not n:
         line_x = x0 + (xi + yi)/2
         line_y = y0 + (xj + yj)/2
-        points.append((line_x, line_y)) 
+        points.append((line_x, line_y))
     else:
         n -= 1
         hilbert(points, x0,               y0,               yi/2, yj/2, xi/2, xj/2, n),
         hilbert(points, x0 + xi/2,        y0 + xj/2,        xi/2, xj/2, yi/2, yj/2, n),
         hilbert(points, x0 + xi/2 + yi/2, y0 + xj/2 + yj/2, xi/2, xj/2, yi/2, yj/2, n),
         hilbert(points, x0 + xi/2 + yi,   y0 + xj/2 + yj,  -yi/2,-yj/2,-xi/2,-xj/2, n),
-        
+
 COLORS = [
     (237,248,251, 220),
     (129,15,124, 220),
@@ -30,11 +33,11 @@ def setup():
     global points, previous, counter, inc_counter
     points = []
     inc_counter = True
-    counter = 1    
+    counter = 1
     hilbert(points, 0, 0, width / 2, 0, 0, height / 2, counter)
-    previous = points.pop() 
+    previous = points.pop()
     stroke(*COLORS[counter-1])
-    
+
 def draw():
     global points, previous, counter, inc_counter
     if not len(points):

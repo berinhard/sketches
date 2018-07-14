@@ -1,3 +1,6 @@
+// Author: Berin
+// Sketches repo: https://github.com/berinhard/sketches
+
 float x, y, px, py, y_center, x_center;
 float timeX;
 float timeY;
