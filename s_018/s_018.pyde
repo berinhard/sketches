@@ -66,7 +66,6 @@ def draw():
         print(len(live_lines))
         if len(live_lines) > 200:
             live_lines = []
-            direction *= -1
         colors = choice(COLORS)
         live_lines.append(ContinuousLine(points, colors=colors))
 
@@ -76,5 +75,3 @@ def draw():
             live_lines.remove(c_line)
         else:
             c_line.display()
-
-    saveFrame("path-{}.jpg".format(frameCount))
