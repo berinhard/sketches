@@ -8,6 +8,7 @@
     <meta name="description" content="Berin's sketches" />
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Droid+Sans+Mono" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-lazyload/8.10.0/lazyload.min.js"></script>
 
 <title>Berin's sketches</title>
     <style>
@@ -246,6 +247,17 @@
                 border: 1px solid black;
             }
         }
+
+        img:not([src]) {
+            visibility: hidden;
+        }
+
+        /* Fixes Firefox anomaly during image load */
+        @-moz-document url-prefix() {
+            img:-moz-loading {
+                visibility: hidden;
+            }
+        }
     </style>
 </head>
 
@@ -259,42 +271,42 @@
 
 <a id="s_021" href="#s_021"><h2>#021</h2></a>
 <p>Video demo <a class="bold_write" href="https://drive.google.com/file/d/1BdYHdrH8WZ-dclH-WwJYLBg7Y9nLoHav/view" target="_blank">here</a> / Python code <a class="bold_write" href="https://github.com/berinhard/sketches/tree/master/s_021/" target="_blank">here</a></p>
-<img alt="s_021" src="s_021/cover.png"></img>
+<img class="lazy" alt="s_021" data-src="s_021/cover.png"></img>
 <p>Fixed pulse lines to work with <a href="#s_015">#015</a> visualization.</p>
 
 <p>------------------------------------------------------------------------------------------</p>
 
 <a id="s_020" href="#s_020"><h2>#020</h2></a>
 <p>Python code and individual images <a class="bold_write" href="https://github.com/berinhard/sketches/tree/master/s_020/" target="_blank">here</a></p>
-<img alt="s_020" src="s_020/cover.gif"></img>
+<img class="lazy" alt="s_020" data-src="s_020/cover.gif"></img>
 <p>Study of color palettes using PVector</p>
 
 <p>------------------------------------------------------------------------------------------</p>
 
 <a id="s_019" href="#s_019"><h2>#019</h2></a>
 <p>Video demo <a class="bold_write" href="https://drive.google.com/file/d/1b6aHKELJV5K9RcRaYfug5y5daA0Y72tK/view" target="_blank">here</a> / Python code <a class="bold_write" href="https://github.com/berinhard/sketches/tree/master/s_019/" target="_blank">here</a></p>
-<img alt="s_019" src="s_019/cover.jpg"></img>
+<img class="lazy" alt="s_019" data-src="s_019/cover.jpg"></img>
 <p>Studying PVectors with velocity and acceleration.</p>
 
 <p>------------------------------------------------------------------------------------------</p>
 
 <a id="s_018" href="#s_018"><h2>#018</h2></a>
 <p>Video demo <a class="bold_write" href="https://drive.google.com/file/d/1EWRjURAm_E8lNYPKhp4pEbNf-xHL-Xps/view" target="_blank">here</a> / Python code <a class="bold_write" href="https://github.com/berinhard/sketches/tree/master/s_018/" target="_blank">here</a></p>
-<img alt="s_018" src="s_018/cover.jpg"></img>
+<img class="lazy" alt="s_018" data-src="s_018/cover.jpg"></img>
 <p>Glitched pulse lines on 4 <a href="https://en.wikipedia.org/wiki/Hilbert_curve" target="_blank">Hilbert's Curves</a>.</p>
 
 <p>------------------------------------------------------------------------------------------</p>
 
 <a id="s_017" href="#s_017"><h2>#017</h2></a>
 <p>Video demo <a class="bold_write" href="https://drive.google.com/file/d/1GMRRmp8Ni0sROjyaMRF815PVXaAZkdqF/view" target="_blank">here</a> / Python code <a class="bold_write" href="https://github.com/berinhard/sketches/tree/master/s_017/" target="_blank">here</a></p>
-<img alt="s_017" src="s_017/cover.jpg"></img>
+<img class="lazy" alt="s_017" data-src="s_017/cover.jpg"></img>
 <p>Further explorations on rotation and starting to play with arcs and HSB color mode.</p>
 
 <p>------------------------------------------------------------------------------------------</p>
 
 <a id="s_016" href="#s_016"><h2>#016</h2></a>
 <p>GIF demo <a class="bold_write" href="s_016/out.gif" target="_blank">here</a> / Python code <a class="bold_write" href="https://github.com/berinhard/sketches/tree/master/s_016/" target="_blank">here</a></p>
-<img alt="s_016" src="s_016/cover.png"></img>
+<img class="lazy" alt="s_016" data-src="s_016/cover.png"></img>
 <p>When trying to add pulse lines to <a href="#s_015">#015</a>, I ran into a very coll bug.</p>
 <p>Added some craziness using rotations and colors randomization.</p>
 
@@ -302,77 +314,77 @@
 
 <a id="s_015" href="#s_015"><h2>#015</h2></a>
 <p>Python code <a class="bold_write" href="https://github.com/berinhard/sketches/tree/master/s_015/hilbert" target="_blank">here</a></p>
-<img alt="s_015" src="s_015/out.gif"></img>
+<img class="lazy" alt="s_015" data-src="s_015/out.gif"></img>
 <p>Studying fractals by drawing <a href="https://en.wikipedia.org/wiki/Hilbert_curve" target="_blank">Hilbert's Curves</a> up to 5 iterations.</p>
 
 <p>------------------------------------------------------------------------------------------</p>
 
 <a id="s_014" href="#s_014"><h2>#014</h2></a>
 <p>Python code <a class="bold_write" href="https://github.com/berinhard/sketches/tree/master/s_014/s_014" target="_blank">here</a></p>
-<img alt="s_014" src="s_014/cover.png"></img>
+<img class="lazy" alt="s_014" data-src="s_014/cover.png"></img>
 <p>Further studies on maze builders.</p>
 
 <p>------------------------------------------------------------------------------------------</p>
 
 <a id="s_013" href="#s_013"><h2>#013</h2></a>
 <p>Python code <a class="bold_write" href="https://github.com/berinhard/sketches/tree/master/s_013/curve_lines" target="_blank">here</a></p>
-<img alt="s_013" src="s_013/cover.png"></img>
+<img class="lazy" alt="s_013" data-src="s_013/cover.png"></img>
 <p>Studying <a href="https://processing.org/reference/curveVertex_.html" target="_blank">curveVertex</a>.</p>
 
 <p>------------------------------------------------------------------------------------------</p>
 
 <a id="s_012" href="#s_012"><h2>#012</h2></a>
 <p>Python code <a class="bold_write" href="s_012/s_012/s_012.pyde" target="_blank">here</a></p>
-<img alt="s_012" src="s_012/cover.png"></img>
+<img class="lazy" alt="s_012" data-src="s_012/cover.png"></img>
 <p>Evolution of <a href="#s_010">#010</a> but changing how to get the cell's neighbors.</p>
 
 <p>------------------------------------------------------------------------------------------</p>
 
 <a id="s_011" href="#s_011"><h2>#011</h2></a>
 <p>Python code <a class="bold_write" href="s_011/s_011/s_011.pyde" target="_blank">here</a></p>
-<img alt="s_011" src="s_011/cover.png"></img>
+<img class="lazy" alt="s_011" data-src="s_011/cover.png"></img>
 <p>Evolution of <a href="#s_010">#010</a> but changing how to get the cell's neighbors.</p>
 
 <p>------------------------------------------------------------------------------------------</p>
 
 <a id="s_010" href="#s_010"><h2>#010</h2></a>
 <p>Python code <a class="bold_write" href="s_010/s_010/s_010.pyde" target="_blank">here</a></p>
-<img alt="s_010" src="s_010/cover.png"></img>
+<img class="lazy" alt="s_010" data-src="s_010/cover.png"></img>
 <p>Evolution of <a href="#s_009">#009</a> but adding colors and limiting the "wall" length.</p>
 
 <p>------------------------------------------------------------------------------------------</p>
 
 <a id="s_009" href="#s_009"><h2>#009</h2></a>
 <p>Python code <a class="bold_write" href="s_009/s_009/s_009.pyde" target="_blank">here</a></p>
-<img alt="s_009" src="s_009/cover.png"></img>
+<img class="lazy" alt="s_009" data-src="s_009/cover.png"></img>
 <p>Study and variaton of a <a href="https://en.wikipedia.org/wiki/Maze_generation_algorithm#Recursive_backtracker" target="_blank">recursive backtracker algorithm</a> implemented at <a href="https://garoa.net.br/wiki/Noite_de_Processing#26.2F06.2F2018_Geradores_de_labirinto" target="_blank">Noites de Processing</a> meetup.</p>
 
 <p>------------------------------------------------------------------------------------------</p>
 
 <a id="s_008" href="#s_008"><h2>#008</h2></a>
 <p>GIF demo <a class="bold_write" href="s_008/out.gif" target="_blank">here</a> / Python code <a class="bold_write" href="s_008/auton_py/auton_py.pyde" target="_blank">here</a></p>
-<img alt="s_008" src="s_008/cover.png"></img>
+<img class="lazy" alt="s_008" data-src="s_008/cover.png"></img>
 <p>Combining Perlin Noise with a customization of <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life" target="_blank">Conway's Game of Life</a></p>
 
 <p>------------------------------------------------------------------------------------------</p>
 
 <a id="s_007" href="#s_007"><h2>#007</h2></a>
 <p>GIF demo <a class="bold_write" href="s_007/out.gif" target="_blank">here</a> / Python code <a class="bold_write" href="s_007/diamons/diamons.pyde" target="_blank">here</a></p>
-<img alt="s_007" src="s_007/cover.png"></img>
+<img class="lazy" alt="s_007" data-src="s_007/cover.png"></img>
 <p>Evolution of <a href="#s_006">#006</a> by adding lines and positioning logic.</p>
 
 <p>------------------------------------------------------------------------------------------</p>
 
 <a id="s_006" href="#s_006"><h2>#006</h2></a>
 <p>GIF demo <a class="bold_write" href="s_006/out.gif" target="_blank">here</a> / Python code <a class="bold_write" href="s_006/diamonds/diamonds.pyde" target="_blank">here</a></p>
-<img alt="s_006" src="s_006/cover.png"></img>
+<img class="lazy" alt="s_006" data-src="s_006/cover.png"></img>
 <p>Experiment to create WaveNoise class.</p>
 
 <p>------------------------------------------------------------------------------------------</p>
 
 <a id="s_005" href="#s_005"><h2>#005</h2></a>
 <p>Java code <a class="bold_write" href="s_005/frozinha/frozinha.pde" target="_blank">here</a></p>
-<img alt="s_005" src="s_005/cover.png"></img>
+<img class="lazy" alt="s_005" data-src="s_005/cover.png"></img>
 <p>Combination of <a href="#s_003">#003</a> and <a href="#s_004">#004</a> to satisfy <a target="_blank" href="https://www.youtube.com/watch?v=t9YfYA3gWZU">Moisés' wish</a>.</p>
 <small>* Couldn't generate a gif because it takes 1 minute to finish =]</small>
 
@@ -380,7 +392,7 @@
 
 <a id="s_004" href="#s_004"><h2>#004</h2></a>
 <p>Java code <a class="bold_write" href="s_004/time_2/time_2.pde" target="_blank">here</a></p>
-<img alt="s_004" src="s_004/cover.png"></img>
+<img class="lazy" alt="s_004" data-src="s_004/cover.png"></img>
 <p>Variation of <a href="#s_003">#003</a>.</p>
 <small>* Couldn't generate a gif because it takes 1 minute to finish =]</small>
 
@@ -388,7 +400,7 @@
 
 <a id="s_003" href="#s_003"><h2>#003</h2></a>
 <p>Java code <a class="bold_write" href="s_003/tempo_mano_velho/tempo_mano_velho.pde" target="_blank">here</a></p>
-<img alt="s_003" src="s_003/cover.png"></img>
+<img class="lazy" alt="s_003" data-src="s_003/cover.png"></img>
 <p>Study to simulate clockwise motion using translation and rotation</p>
 <small>* Couldn't generate a gif because it takes 1 minute to finish =]</small>
 
@@ -396,7 +408,7 @@
 
 <a id="s_002" href="#s_002"><h2>#002</h2></a>
 <p>GIF demo <a class="bold_write" href="s_002/out.gif" target="_blank">here</a> / Python code <a class="bold_write" href="s_002/py_waves/py_waves.pyde" target="_blank">here</a></p>
-<img alt="s_002" src="s_002/cover.png"></img>
+<img class="lazy" alt="s_002" data-src="s_002/cover.png"></img>
 <p>Wave propagation with simple concepts of matrix algebra and analytical geometry.</p>
 
 <p>------------------------------------------------------------------------------------------</p>
@@ -404,7 +416,11 @@
 
 <a id="s_001" href="#s_001"><h2>#001</h2></a>
 <p>GIF demo <a class="bold_write" href="s_001/out.gif" target="_blank">here</a> / Java code <a class="bold_write" href="s_001/draft/draft.pde" target="_blank">here</a></p>
-<img alt="s_001" src="s_001/cover.png"></img>
+<img class="lazy" alt="s_001" data-src="s_001/cover.png"></img>
 <p>Experiment to understand quadrant positioning and <a href="https://processing.org/reference/noise_.html" target="_blank">noise</a> function</p>
+
+    <script>
+        new LazyLoad();
+    </script>
 
 </html>
