@@ -101,21 +101,23 @@ def setup():
     global maze
 
     randomSeed(1)
-    size(700, 700)
+    size(980, 980)
     colorMode(HSB)
     strokeCap(ROUND)
-    strokeWeight(5)
+    strokeJoin(MITER)
+    strokeWeight(7)
     border = 5
     spacing = (width - border * 2) / GRID_SIZE
     maze = Maze(GRID_SIZE)
     maze.init_cells(border, spacing)
     background("#c1bdb4")
+    translate(15, 15)
 
 
 def draw():
     try:
         maze.break_wall()
     except Exception:
-        saveFrame()
+        saveFrame("####.tif")
         noLoop()
     println(len(maze.unvisited_cells))
