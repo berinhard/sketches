@@ -38,7 +38,3 @@ def draw():
         #point(x2, y2)
     
         line(x1, y1, x2, y2)
-        
-    #print(frameCount)
-    #if frameCount < 720:
-    #    saveFrame("img###.jpg")
