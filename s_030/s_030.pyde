@@ -1,3 +1,6 @@
+# Author: Berin
+# Sketches repo: https://github.com/berinhard/sketches
+
 from random import choice
 
 gap = 30
@@ -8,6 +11,7 @@ WHITE = color(255)
 RED = color(255, 0, 0)
 
 def setup():
+    noCursor()
     size(1000, 1000)
     noFill()
     strokeWeight(thickness)

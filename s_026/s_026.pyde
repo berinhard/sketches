@@ -1,3 +1,6 @@
+# Author: Berin
+# Sketches repo: https://github.com/berinhard/sketches
+
 from random import choice
 
 WIDTH, HEIGHT = 1200, 700

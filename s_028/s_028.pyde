@@ -1,3 +1,6 @@
+# Author: Berin
+# Sketches repo: https://github.com/berinhard/sketches
+
 import time
 from datetime import datetime
 from random import choice, shuffle

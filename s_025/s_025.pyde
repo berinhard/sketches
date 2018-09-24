@@ -1,3 +1,6 @@
+# Author: Berin
+# Sketches repo: https://github.com/berinhard/sketches
+
 def setup():
     size(900, 900)
     frameRate(10)
