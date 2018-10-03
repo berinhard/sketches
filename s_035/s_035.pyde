@@ -136,11 +136,11 @@ def draw():
     positions.add_new_line(p1, p2)
     positions.display()
     
-    #saveFrame("######.png")
-    #
-    #if frameCount == 30000:
+   # saveFrame("######.png")
+   # 
+    #if frameCount == 1200:
     #     noLoop()
-    #elif not frameCount % 800:
+    #elif not frameCount % 600:
     #     positions.lines = []
     #     redraw()
     #print(frameCount)
