@@ -1,3 +1,6 @@
+# Author: Berin
+# Sketches repo: https://github.com/berinhard/sketches
+
 from random import choice
 
 WHITE = color(230)  
@@ -123,7 +126,6 @@ def setup():
     #fullScreen()
     background(WHITE)
     noFill()
-    #frameRate(1)
     strokeWeight(2)
 
 def draw():
@@ -134,14 +136,14 @@ def draw():
     positions.add_new_line(p1, p2)
     positions.display()
     
-    # saveFrame("#####.png")
-    
-    # if frameCount == 1000:
+    #saveFrame("######.png")
+    #
+    #if frameCount == 30000:
     #     noLoop()
-    # elif not frameCount % 250:
+    #elif not frameCount % 800:
     #     positions.lines = []
     #     redraw()
-    print(frameCount)
+    #print(frameCount)
     
 def keyPressed():
     if key == 'n':
