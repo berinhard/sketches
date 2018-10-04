@@ -1,6 +1,8 @@
 # Author: Berin
 # Sketches repo: https://github.com/berinhard/sketches
-# First experimentation with Alexandre B A Villares' grid function 
+# First experimentation with Alexandre B A Villares' grid function
+# Source: http://abav.lugaralgum.com/sketch-a-day/
+ 
 # Cool bug found while studying the code
 
 def setup():
