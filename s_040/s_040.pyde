@@ -46,3 +46,8 @@ def draw():
     #elif frameCount in [4505, 9010, 13515]:
     #    background(WHITE)
     
+    
+def keyPressed():
+    if key == 's':
+        saveFrame("######.png")
+    
