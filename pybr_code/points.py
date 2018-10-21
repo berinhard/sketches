@@ -18,11 +18,12 @@ class ConnectablePoint():
         x, y = self.pos.x, self.pos.y
 
         if random(1) < randomizer.reb_prob(y):
-            stroke(RED_CLEAN)
-            fill(RED_CLEAN)
+            c = RED_CLEAN
         else:
-            stroke(BLACK_CLEAN)
-            fill(BLACK_CLEAN)
+            c = BLACK_CLEAN
+            
+        stroke(c)
+        fill(c)
         strokeWeight(1)
         beginShape()
         vertex(x, y)

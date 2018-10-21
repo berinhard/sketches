@@ -5,7 +5,7 @@ from points import ConnectablePoint
 BLACK = color(17, 17, 17)
 BLACK_CLEAN = color(17, 17, 17, 200)
 RED_CLEAN = color(217, 17, 42, 200)
-char_values = ascii_uppercase + '0123456789'
+char_values = ascii_uppercase + '0123456789'  # ABC...XYZ0123456789
 points = [] 
 
 
@@ -21,6 +21,9 @@ points = []
 # W --> 23
 # V --> 22
 # 8 --> 35
+# Total = 176 
+#
+# Percentual de pontos = 176 / 1260
 #####
 
 def setup():
@@ -38,9 +41,9 @@ class QRCodeRandomizer():
     @property
     def points(self):
         if not self._points:    
-            max_sum = (len(char_values) - 1) * len(char_values)
+            base_calc = 1260
             text_sum = sum(char_values.index(c) + 1 for c in self.qrcode)
-            percent = float(text_sum) / max_sum
+            percent = float(text_sum) / base_calc
             rect_width, rect_height = width - 100, height - 100
             rect_area = rect_width * rect_height / 30.0
             
@@ -65,12 +68,8 @@ class QRCodeRandomizer():
         return float(char_values.index(qrcode_char) + 1) / (len(char_values) + 1)  
 
 
-
-dukao = "QA7W57EE70"
-eu = "QCMRLGHWTZ"
-luciano = "QA8E4KWHX7"
-julio = "QGJHMRPAY5"
-qrcode_randomizer = QRCodeRandomizer(eu) 
+qrcode = "QCMRLGHWTZ"
+qrcode_randomizer = QRCodeRandomizer(qrcode) 
 
 
 def draw():
@@ -86,5 +85,18 @@ def draw():
     signature = "{} - {} points".format(qrcode_randomizer.qrcode, len(points))
     text(signature, 50,  height - 25)
     saveFrame("{}.png".format(qrcode_randomizer.qrcode))
+    
+    display_label_exp = False
+    if display_label_exp:
+        row_size = (height - 100) / float(len(qrcode_randomizer.qrcode)) 
+        for i, c in enumerate(qrcode_randomizer.qrcode):
+            x, y = 50, 50 + i * row_size
+            w, h = width - 100, (i + 1) * row_size
+            strokeWeight(2)
+            stroke(0, 255, 0)
+            noFill()
+            rect(x, y, w, h)
+            text(c, 25, y + row_size / 2)
+            
         
     noLoop()
