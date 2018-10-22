@@ -17,7 +17,7 @@ def setup():
     size(DIMENSION + ROW_SIZE + 10, DIMENSION + ROW_SIZE + 10)
     noStroke()
     strokeWeight(1)
-    #frameRate(1.5)
+    frameRate(1.5)
 
     
 def save_video_frames(frame_rate, seconds, stop_run=True, extension="png", log_frame=True):
