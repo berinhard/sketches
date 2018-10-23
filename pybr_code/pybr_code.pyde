@@ -68,7 +68,7 @@ class QRCodeRandomizer():
         return float(char_values.index(qrcode_char) + 1) / (len(char_values) + 1)  
 
 
-qrcode = "QCMRLGHWTZ"
+qrcode = "QJ3WHYX5F5"
 qrcode_randomizer = QRCodeRandomizer(qrcode) 
 
 
@@ -97,6 +97,5 @@ def draw():
             noFill()
             rect(x, y, w, h)
             text(c, 25, y + row_size / 2)
-            
-        
+
     noLoop()
