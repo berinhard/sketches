@@ -19,7 +19,7 @@ def setup():
     size(DIMENSION + ROW_SIZE + 10, DIMENSION + ROW_SIZE + 10)
     noStroke()
     strokeWeight(1)
-    frameRate(1)
+    #frameRate(1)
 
 
 class RandomComposition():
@@ -79,7 +79,7 @@ def draw():
             composition.display()
 
                   
-    save_video_frames(1.5, 10 * 60) 
+    #save_video_frames(1, 10 * 60) 
     
 def keyPressed():
     if key == 'n':
