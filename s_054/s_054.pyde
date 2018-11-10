@@ -7,13 +7,13 @@ def setup():
     colorMode(HSB, 100)
     background(0, 0, 7)
     strokeWeight(2)
-    
+
 def draw():
     base_color = [0, 100, 100]
     if not frameCount % width:
         #saveFrame("#######.png")
-        background(0, 0, 7)    
-    
+        background(0, 0, 7)
+
     for i in range(num_lines):
         noise_scale = (i + 1) * 10.0
         n = noise((frameCount + 1) / noise_scale)
@@ -25,6 +25,3 @@ def draw():
         py = pys[i]
         line(px, py, x, y)
         pys[i] = y
-        
-        
-        
