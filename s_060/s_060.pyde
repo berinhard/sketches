@@ -18,7 +18,7 @@ px, py = -1000, -1000
 def setup():
     size(800, 800)
     strokeWeight(2)
-    #frameRate(25)
+    frameRate(25)
     noStroke()
 
 
@@ -70,4 +70,4 @@ def draw():
                 w, h = 10, 10
                 rect(0, 0, w, h)
 
-    save_video_frames(25, 10 * 60)
+    #save_video_frames(25, 10 * 60)
