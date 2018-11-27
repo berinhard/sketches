@@ -1,4 +1,4 @@
-# Author: Berin
+# Author: Berin and Luciano Ratamero
 # Sketches repo: https://github.com/berinhard/sketches
 
 from random import choice, shuffle
@@ -26,8 +26,8 @@ MAX_RADIUS = 200
 
 class Bokeh(object):
 
-    def __init__(self, radius=50):
-        self.radius = 50
+    def __init__(self):
+        self.radius = 1
         self.x = choice(range(width))
         self.y = choice(range(height))
         self.velocity = PVector(1, 1)
@@ -65,11 +65,11 @@ def setup():
     global px, py
 
     fullScreen()
-    noStroke()
     background(BLACK)
     colorMode(RGB, 100)
     frameRate(24)
     noCursor()
+    noStroke()
 
     px = random(1) * width
     py = random(1) * height
@@ -92,7 +92,7 @@ def draw():
 
     print(len(bokeh_list))
 
-    save_video_frames(24, 60 * 10)
+    #save_video_frames(24, 60 * 10)
 
     if random(1) > 0.995:
         COLORS = None
