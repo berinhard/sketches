@@ -136,6 +136,6 @@ def draw():
     try:
         maze.break_wall()
     except Exception:
-        saveFrame()
+        #defsaveFrame()
         noLoop()
     println(len(maze.unvisited_cells))
