@@ -24,30 +24,28 @@ def draw():
     single_line_size = 30
     y_range = range(100, height - 100, single_line_size)
 
-
     for i, x in enumerate(range(25, width - 25, single_line_size)):
-        x += single_line_size / 2
+        x += int(single_line_size / 2)
         for j, y in enumerate(y_range):
-
+            current_x = x
             power = (len(y_range) - j) ** 1.2
             random_v = random(1) ** power
             angle = int(map(random_v, 0, 1, 0, 360))
-            angle = radians(angle)
+
             if angle:
                 stroke(RED)
-                x += map(random(1), 0, 1, -1 * j ** 0.5, j ** 0.5)
-                y += map(random(1), 0, 1, -1 * j ** 0.5, j ** 0.5)
+                current_x = int(current_x + map(random(1), 0, 1, -1 * (j ** 0.8), j ** 0.8))
+                y = int(y + map(random(1), 0, 1, -1 * (j ** 0.8), j ** 0.8))
             else:
                 stroke(BLACK)
 
-
             with pushMatrix():
-                translate(x, y)
-                rotate(angle)
+                translate(current_x, y)
+                if angle:
+                    rotate(radians(angle))
                 line(-single_line_size / 2 + 2.5, 0, (single_line_size) / 2 - 2.5, 0)
-
-
-
+                line(-single_line_size / 2 + 2.5, -4, (single_line_size) / 2 - 2.5, -4)
+                line(-single_line_size / 2 + 2.5, 4, (single_line_size) / 2 - 2.5, 4)
 
 
 def keyPressed():
