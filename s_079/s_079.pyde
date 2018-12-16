@@ -63,7 +63,7 @@ def subdivide_line(p1, p2, depth):
         return []
 
     mid_x = (p1.x + p2.x) / 2
-    mid_y = (p1.y + p2.y) / 2 + random(-10, 10)
+    mid_y = (p1.y + p2.y) / 2 + random(-20, 20)
 
     new_p = PVector(mid_x, mid_y)
 
