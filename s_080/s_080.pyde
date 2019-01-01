@@ -48,6 +48,7 @@ class StableWalker(object):
         self.pos = self.next_pos
 
     def display(self):
+        stroke(BLACK)
         line(self.start_pos.x, self.start_pos.y, self.next_pos.x, self.next_pos.y)
 
 def setup():
@@ -56,18 +57,19 @@ def setup():
     background(WHITE_WITH_ALPHA)
     strokeWeight(2)
     stroke(BLACK)
-    #frameRate(24)
+    frameRate(24)
     start = PVector(random(200, 600), random(200, 600))
     walker = StableWalker(start)
 
 def draw():
     global walker
 
+    noStroke()
     fill(WHITE_WITH_ALPHA)
     rect(0, 0, width, height)
     walker.move()
     walker.display()
-    save_video_frames(24, 60 * 5)
+    #save_video_frames(24, 60 * 5)
 
     if not frameCount % 2000:
         start = PVector(random(200, 600), random(200, 600))
