@@ -26,14 +26,15 @@ def draw():
     else:
         stroke(RED)
 
+    rate = 0.8
     x, y = width / 2, height / 2
-    n_sides = 7
-    angle_rate = 1
+    n_sides = 3
+    angle_rate = rate
     angle_rotation = radians(frameCount * angle_rate)
     regular_polygon(x, y, radius, n_sides, angle_rotation=angle_rotation)
 
-    radius -= 1
+    radius -= rate
 
-    if abs(radius) == 300:
+    if abs(radius) >= 300:
         noLoop()
         saveFrame("r{}-a{}.png".format(n_sides, angle_rate))
