@@ -69,4 +69,4 @@ def draw():
     for square in nested_squares:
         square.draw_squares()
 
-    saveFrame("####.png")
+    #saveFrame("####.png")
