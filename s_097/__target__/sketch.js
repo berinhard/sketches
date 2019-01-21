@@ -1,0 +1,4 @@
+'use strict';import"./org.transcrypt.__runtime__.js";import{P5,start_p5}from"./pyp5js.js";var __name__="__main__";export var t=0;export var setup=function(){P5.createCanvas(600,600);P5.noStroke();P5.fill(40,200,40)};export var draw=function(){var width=P5.width;var height=P5.height;P5.background(10,10);var xAngle=P5.map(P5.mouseX,0,P5.width,-4*P5.PI,4*P5.PI,true);var yAngle=P5.map(P5.mouseY,0,P5.height,-4*P5.PI,4*P5.PI,true);for(var x=0;x<width;x+=30)for(var y=0;y<height;y+=30){var angle=xAngle*(x/
+width)+yAngle*(y/height);var myX=x+20*P5.cos(2*P5.PI*t+angle);var myY=y+20*P5.sin(2*P5.PI*t+angle);P5.ellipse(myX,myY,10)}t=t+.01;console.log(P5.frameRate())};export var my_p5=start_p5(setup,draw);
+
+//# sourceMappingURL=sketch.map
