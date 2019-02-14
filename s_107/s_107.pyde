@@ -5,6 +5,8 @@ from random import choice
 from collections import namedtuple
 
 
+
+
 WHITE = color(228, 288, 288)
 BLACK = color(27, 27, 27)
 

@@ -2,13 +2,6 @@
 # Sketches repo: https://github.com/berinhard/sketches
 from random import choice
 
-square_sizes = range(50, 300, 25)
-square_positions = range(0, 900, 25)
-angle_start = 0
-angles = [
-    angle_start,
-    angle_start + QUARTER_PI,
-]
 
 colors_1 = [
     color(8,61,95),
@@ -33,14 +26,24 @@ colors_3 = [
 ]
 
 def setup():
-    size(900, 900)
+    #size(900, 900)
+    size(2560, 1080)
     noStroke()
     rectMode(CENTER)
     background(0)
 
 def draw():
-    x = choice(square_positions)
-    y = choice(square_positions)
+    square_sizes = range(50, 300, 25)
+    square_positions_x = range(0, width, 25)
+    square_positions_y = range(0, height, 25)
+    angle_start = 0
+    angles = [
+        angle_start,
+        angle_start + QUARTER_PI,
+    ]
+
+    x = choice(square_positions_x)
+    y = choice(square_positions_y)
 
     with pushMatrix():
         d = choice(square_sizes)
