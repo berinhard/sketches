@@ -58,4 +58,4 @@ def draw():
             point_2 = get_vector(i * factor, total, r)
             line(point_1.x, point_1.y, point_2.x, point_2.y)
 
-    save_video_frames(12, 60 * 10)
+    #save_video_frames(12, 60 * 10)
