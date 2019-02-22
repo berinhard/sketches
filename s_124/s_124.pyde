@@ -1,5 +1,6 @@
 # Author: Berin
 # Sketches repo: https://github.com/berinhard/sketches
+from berin.save_frames import save_video_frames
 
 WHITE = color(230, 230, 230)
 BLACK = color(27, 27, 27)
@@ -40,16 +41,17 @@ def draw():
         upper_points.append((width, y0 + y_diff))
 
     stroke(WHITE)
+    walk = 1
     for i, coords in enumerate(lower_points):
         x, y = coords
         line(x, y0 + 2, x, y)
-        lower_points[i] = (x + 1, y)
+        lower_points[i] = (x + walk, y)
 
     stroke(RED)
     for i, coords in enumerate(upper_points):
         x, y = coords
         line(x, y0 - 2, x, y)
-        upper_points[i] = (x - 1, y)
+        upper_points[i] = (x - walk, y)
 
     current_step -= 1
     if current_step < 0:
@@ -57,3 +59,5 @@ def draw():
 
     lower_points = [(x, y) for x, y in lower_points if not x > width]
     upper_points = [(x, y) for x, y in upper_points if x > 0]
+
+    save_video_frames(60, 60)
