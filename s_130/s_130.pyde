@@ -8,33 +8,38 @@ WHITE = color(235, 235, 235)
 BLACK = color(42)
 RED = color(181, 32, 42)
 
+OFFSET = 2
+
 
 def pattern(w, h):
-    w -= 2
-    h -= 2
+    w -= OFFSET
+    h -= OFFSET
     v1, v2, v3, v4 = PVector(0, 0), PVector(w, 0), PVector(0, h), PVector(w, h)
 
+    # margin rect
     strokeWeight(0.5)
     stroke(27, 27, 27, 130)
     noFill()
     rect(0, 0, w, h)
 
+    # internal arc
     x = 7 * w / 11
     y = 7 * h / 11
     noStroke()
     fill(RED)
-    arc(x, y, 5, 5, 0, QUARTER_PI)
     arc(x, y, 3*w/4, 3*h/4, 0,  HALF_PI)
 
-    strokeWeight(2)
+    # first set of red lines
     x_pos = [PVector.lerp(v1, v2, 0.1 * i) for i in range(2, 6)]
     y_pos = [PVector.lerp(v1, v3, 0.1 * i) for i in range(2, 6)]
 
+    strokeWeight(2)
     stroke(RED)
     for vx, vy in zip(x_pos, y_pos):
         line(vx.x, vx.y, vy.x, vy.y)
 
 
+    # second set of red lines
     x_pos = [PVector.lerp(v1, v2, 0.1 * i) for i in range(7, 10)]
     y_pos = [PVector.lerp(v1, v3, 0.1 * i) for i in range(7, 10)]
 
@@ -42,6 +47,7 @@ def pattern(w, h):
     for vx, vy in zip(x_pos, y_pos):
         line(vx.x, vx.y, vy.x, vy.y)
 
+    # minor black starts from last line from second set and goes borders
     last_x, last_y = x_pos[-1], y_pos[-1]
     pos = [PVector.lerp(last_x, last_y, 0.1 * i) for i in range(3, 5)]
     stroke(BLACK)
@@ -100,7 +106,7 @@ def draw():
     num_rows = 5
     elem_size = width / num_rows
     grid = VirtualGrid(0, 0, num_rows, elem_size)
-    grid.draw(tiled_pattern, elem_size - 2, elem_size - 2, pattern)
+    grid.draw(tiled_pattern, elem_size - OFFSET, elem_size - OFFSET, pattern)
 
     #tiled_pattern(width / 2, height / 2, pattern)
 
