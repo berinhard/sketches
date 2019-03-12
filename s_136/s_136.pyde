@@ -35,6 +35,7 @@ def bezier_line(i, j, size):
         points = [polar_coordinate(0, 0, r, a) for a in angles]
 
         for i, p in enumerate(points):
+            strokeWeight(i * 0.6 + 1)
             previous = points[i - 1]
             ffset = 10
             min_value = offset - half
