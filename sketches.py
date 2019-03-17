@@ -12,7 +12,7 @@ TEMPLATES_DIR = SKETCH_DIR.child('templates')
 def cli():
     pass
 
-@cli.command()
+@cli.command('new')
 @click.argument('dir_name')
 def configure_new_sketch(dir_name):
     new_dir = SKETCH_DIR.child(dir_name)
