@@ -18,6 +18,9 @@ def cli():
 @cli.command('new')
 @click.argument('sketch_name')
 def configure_new_sketch(sketch_name):
+    """
+    Create dir and configure boilerplate
+    """
     new_dir = SKETCH_DIR.child(sketch_name)
     new_sketch = new_dir.child(f'{sketch_name}.pyde')
     base_sketch = TEMPLATES_DIR.child('base_sketch.pyde')
@@ -34,6 +37,9 @@ def configure_new_sketch(sketch_name):
 @click.option('--output', '-o', default=None)
 @click.option('--clean-after', '-c', is_flag=True, default=False)
 def export_to_video(sketch_name, frame_rate, output, clean_after):
+    """
+    Export frames from sketch to a MP4 video
+    """
     sketch_dir = SKETCH_DIR.child(sketch_name)
 
     if not sketch_dir.exists():
