@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import click
 import os
 from cprint import cprint
@@ -7,7 +8,11 @@ from unipath import Path
 SKETCH_DIR = Path(__file__).parent
 TEMPLATES_DIR = SKETCH_DIR.child('templates')
 
-@click.command()
+@click.group()
+def cli():
+    pass
+
+@cli.command()
 @click.argument('dir_name')
 def configure_new_sketch(dir_name):
     new_dir = SKETCH_DIR.child(dir_name)
@@ -22,4 +27,4 @@ def configure_new_sketch(dir_name):
 
 
 if __name__ == '__main__':
-    configure_new_sketch()
+    cli()
