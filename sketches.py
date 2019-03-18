@@ -85,9 +85,11 @@ def update_index_with_sketch(sketch_name, title, cover):
     if not sketch_dir.exists():
         cprint.err(f"There's no directory for the sketch {sketch_name}", interrupt=True)
 
-    desc = ''
+    desc, desc_ptbr = '', ''
     while not desc:
         desc = input("Enter with sketch's description: ").strip()
+    while not desc_ptbr:
+        desc_ptbr = input("Entre com a descrição do sketch (PT-BR): ").strip()
 
     title = title or f'#{sketch_name}'
     template = templates.get_template('new_entry_snippet.html')
@@ -100,9 +102,19 @@ def update_index_with_sketch(sketch_name, title, cover):
         'description': desc,
     }
 
-    print(template.render(ctx))
+    content = template.render(ctx)
+    index_template = templates.get_template('index_base.html')
+    new_index_content = index_template.render(new_sketch_content=content)
 
+    with open(SKETCH_DIR.child('index.html'), 'w') as fd:
+        fd.write(new_index_content)
 
+    content = template.render(ctx)
+    index_template = templates.get_template('index_base.html')
+    base_index_content = index_template.render(new_sketch_content='{{ new_sketch_content }}\n\n' + content)
+
+    with open(TEMPLATES_DIR.child('index_base.html'), 'w') as fd:
+        fd.write(base_index_content)
 
 
 if __name__ == '__main__':
