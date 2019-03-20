@@ -61,8 +61,8 @@ class GifLine(object):
     def draw(self):
         x1 = self.x - self.offset
         x2 = self.x + self.offset
-        w = map(abs(width / 2 - self.x), 0, width / 2, 50, 10)
-        strokeWeight(w)
+        #w = map(abs(width / 2 - self.x), 0, width / 2, 50, 10)
+        strokeWeight(2)
         stroke(WHITE)
         line(x1, self.y, x2, self.y)
 
@@ -94,8 +94,6 @@ def draw():
         l.update(percent)
         l.draw()
 
-    fill(BLACK)
-    noStroke()
     #rect(0, 0, 20, height)
     #rect(width - 20, 0, 20, height)
 

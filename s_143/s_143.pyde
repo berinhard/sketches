@@ -14,9 +14,9 @@ COMPLEMENTARY = color(218, 36, 89)
 def get_gif_percent(total_frames):
     return float(frameCount) % total_frames / total_frames
 
-frame_rate = 100
+total_frames = 100
 going_flag = True
-all_percents = [float(i) / frame_rate for i in range(1, frame_rate + 1)]
+all_percents = [float(i) / total_frames for i in range(1, total_frames + 1)]
 WIDTH, HEIGHT = 900, 900
 params = [
     (
@@ -33,10 +33,9 @@ def setup():
 
 
 def draw():
-    index = frameCount % frame_rate
+    index = frameCount % total_frames
     print(all_percents)
     print(params)
-    #percents = get_gif_percent(100)
 
     global going_flag
 
@@ -66,11 +65,6 @@ def draw():
             fill(COMPLEMENTARY)
             rect(width, x - 10, -h + 10,  20)
 
-    if frameCount > 200:
-        noLoop()
-    saveFrame("####.png")
-
-
-    # if frameCount >= 101:
-    #     noLoop()
-    #saveFrame(nf(frameCount, 4) + ".png")
+    #if frameCount > 200:
+    #    noLoop()
+    #saveFrame("####.png")
