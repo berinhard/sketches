@@ -116,6 +116,13 @@ def update_index_with_sketch(sketch_name, title, cover):
     with open(TEMPLATES_DIR.child('index_base.html'), 'w') as fd:
         fd.write(base_index_content)
 
+    cprint.ok("\nTweet content:")
+    tweet_template = templates.get_template('tweet_template.txt')
+    ctx = {'eng_desc': desc, 'pt_desc': desc_ptbr, 'name': sketch_name}
+    content = tweet_template.render(**ctx)
+    cprint.ok(content)
+
+
 
 if __name__ == '__main__':
     cli()
