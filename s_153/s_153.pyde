@@ -1,0 +1,62 @@
+# Author: Berin
+# Sketches repo: https://github.com/berinhard/sketches
+from berin.coords import draw_at_center, polar_coordinate
+from berin.grids import VirtualGrid
+from berin.palettes import get_color_palette
+from berin.save_frames import save_video_frames
+from berin.shapes import regular_polygon, draw_shape, lines_intersection, IntersectionLine
+from berin import easings
+
+from shape import ShapeWithInnerFilling, BLACK
+
+
+elem_size = 90.0
+
+BLACK = color(27, 27, 27)
+PURPLE = color(235, 0, 235, 1)
+GOLD = color(235, 235, 0, 1)
+CYAN = color(0, 235, 235, 1)
+WHITE = color(242, 242, 242, 1)
+RED = color(242, 127, 12, 1)
+
+BACK_RED = color(121, 32, 45)
+BACK_BLUE = color(35, 32, 121)
+BACK_GREEN = color(19, 114, 77)
+
+shapes = []
+
+def init_shapes():
+    global shapes
+
+    v1, v2 = sorted([random(100, 450), random(100, 450)])
+    v3, v4 = sorted([random(450, 800), random(450, 800)])
+
+    shape_1_vectors = [
+        PVector(v1, 100),
+        PVector(800, v2),
+        PVector(v4, 800),
+        PVector(100, v3),
+    ]
+    shapes = [
+        ShapeWithInnerFilling.bezier_shape(shape_1_vectors),
+    ]
+
+
+def setup():
+    global grid
+    size(900, 900)
+    background(BLACK)
+    init_shapes()
+
+def draw():
+    for shape in shapes:
+        shape.update()
+        shape.display()
+
+def keyPressed():
+    if key == 's':
+        saveFrame("########.png")
+    elif key == 'n':
+        init_shapes()
+        background(BLACK)
+        redraw()
