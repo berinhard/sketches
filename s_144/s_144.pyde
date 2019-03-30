@@ -1,3 +1,4 @@
+
 # Author: Berin
 # Sketches repo: https://github.com/berinhard/sketches
 from berin import easings
@@ -97,6 +98,6 @@ def draw():
     #rect(0, 0, 20, height)
     #rect(width - 20, 0, 20, height)
 
-    saveFrame("####.png")
-    if counter == total_frames:
-        noLoop()
+    #saveFrame("####.png")
+    #if counter == total_frames:
+    #    noLoop()

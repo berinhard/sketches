@@ -12,6 +12,16 @@ from shape import ShapeWithInnerFilling, BLACK
 
 elem_size = 90.0
 
+BLACK = color(27, 27, 27)
+PURPLE = color(235, 0, 235, 1)
+GOLD = color(235, 235, 0, 1)
+CYAN = color(0, 235, 235, 1)
+WHITE = color(242, 242, 242, 1)
+RED = color(242, 127, 12, 1)
+
+BACK_RED = color(121, 32, 45)
+BACK_BLUE = color(35, 32, 121)
+BACK_GREEN = color(19, 114, 77)
 
 shapes = []
 

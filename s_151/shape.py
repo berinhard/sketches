@@ -16,9 +16,8 @@ BACK_RED = color(121, 32, 45)
 BACK_BLUE = color(35, 32, 121)
 BACK_GREEN = color(19, 114, 77)
 
-LINE_COLOR = WHITE
+LINE_COLOR = RED
 SHAPE_BACKGROUND = BLACK
-BACKGROUND = color(242, 242, 242)
 
 class FillingShapeVertex(object):
 
@@ -52,9 +51,7 @@ class FillingShapeVertex(object):
         if new_pos >= 1:
             raise self.ReachedMaxEdge()
 
-        x = bezierPoint(start.x, start.cpx1, start.cpx2, start.nx, new_pos)
-        y = bezierPoint(start.y, start.cpy1, start.cpy2, start.ny, new_pos)
-        self.pos = PVector(x, y)
+        self.pos = self.edge.get_point_at(new_pos)
         self.edge_pos = new_pos
 
 
@@ -73,14 +70,7 @@ class ShapeInnerFilling(object):
         py_random.shuffle(edges)
         for i in range(self.n_vertices):
             edge = edges.pop()
-            start, end = edge
-
-            lerp_index = random(1)
-            pos = PVector.lerp(PVector(start.x, start.y), PVector(end.x, end.y), lerp_index)
-
-
-            x = bezierPoint(start.x, start.cpx1, start.cpx2, start.nx, lerp_index)
-            y = bezierPoint(start.y, start.cpy1, start.cpy2, start.ny, lerp_index)
+            pos = edge.get_random_point()
 
             v = FillingShapeVertex(PVector(x, y), edge, lerp_index, random(0.001, 0.01))
             self.vertices.append(v)
@@ -115,6 +105,27 @@ class BezierShapeVertex(object):
 
     def __eq__(self, other):
         return self.x == other.x and self.y == other.y
+
+
+class BazierShapeEdge(object):
+
+    def __init__(self, start, end):
+        self.start = start
+        self.end = end
+
+    def __eq__(self, other):
+        self.start == other.start and self.end == other.end
+
+    def get_point_at(self, lerp_index):
+        start, end = self.start, self.end
+        x = bezierPoint(start.x, start.cpx1, start.cpx2, start.nx, lerp_index)
+        y = bezierPoint(start.y, start.cpy1, start.cpy2, start.ny, lerp_index)
+        return lerp(start, end, lerp_index)
+
+    def get_random_point(self):
+        lerp_index = random(1)
+        return self.get_point_at(lerp_index)
+
 
 
 class ShapeWithInnerFilling(object):
@@ -156,7 +167,7 @@ class ShapeWithInnerFilling(object):
     @property
     def edges(self):
         v = self.vertices
-        return [(v[i - 1], v[i]) for i in range(len(v))]
+        return [(BazierShapeEdge(v[i - 1], v[i])) for i in range(len(v))]
 
     def update(self):
         self.filling.update()
