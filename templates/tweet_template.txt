@@ -1,4 +1,4 @@
-daily sketch XXX - {{ eng_desc }} / {{ pt_desc }}
+daily sketch - {{ eng_desc }} / {{ pt_desc }}
 
 #python code https://berinhard.github.io/sketches/#{{ name }}
 
