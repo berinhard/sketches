@@ -15,8 +15,9 @@ RED = color(183, 15, 38, 1)
 PURPLE = color(235, 0, 235, 1)
 GOLD = color(235, 235, 0, 1)
 CYAN = color(0, 235, 235, 1)
+GREEN = color(51, 255, 51, 1)
 WHITE = color(242, 242, 242, 1)
-COLORS = [WHITE, GOLD, GOLD, GOLD]
+COLORS = [WHITE, GREEN, GREEN, GREEN]
 
 
 WIDTH, HEIGTH = 800, 800
