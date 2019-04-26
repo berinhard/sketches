@@ -1,5 +1,6 @@
 # Author: Berin
 # Sketches repo: https://github.com/berinhard/sketches
+# berin lib: https://github.com/berinhard/berin/
 from berin.coords import draw_at_center, polar_coordinate
 from berin.grids import VirtualGrid
 from berin.palettes import get_color_palette
