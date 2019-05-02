@@ -102,4 +102,4 @@ def draw():
     for particle in particles:
         particle.display()
 
-    save_video_frames(24, 60)
+    #save_video_frames(24, 60)
