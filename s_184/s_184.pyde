@@ -84,4 +84,4 @@ def draw():
 
     if frameCount == TOTAL_FRAMES:
         noLoop()
-    saveFrame("#####.png")
+    #saveFrame("#####.png")
