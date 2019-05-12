@@ -1,5 +1,11 @@
 daily sketch - {{ eng_desc }} / {{ pt_desc }}
 
-#python code https://berinhard.github.io/sketches/#{{ name }}
+{% if pyp5js %}
+Live demo https://berinhard.github.io/sketches/{{ name }}
 
-#processing #creativecoding #dailysketch #dailyart #sketchaday #gif #gifart #generative #generativeart #mathart
+Done with #pyp5js #python
+{% else %}
+#python code https://berinhard.github.io/sketches/#{{ name }}
+{% endif %}
+
+#processing #creativecoding #dailysketch #dailyart #sketchaday #generative #generativeart {% if pyp5js %}#p5js{% endif %}

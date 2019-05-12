@@ -123,7 +123,12 @@ def update_index_with_sketch(sketch_name, title, cover, pyp5js):
 
     cprint.ok("\nTweet content:")
     tweet_template = templates.get_template('tweet_template.txt')
-    ctx = {'eng_desc': desc, 'pt_desc': desc_ptbr, 'name': sketch_name}
+    ctx = {
+        'eng_desc': desc,
+        'pt_desc': desc_ptbr,
+        'name': sketch_name,
+        'pyp5js': pyp5js,
+    }
     content = tweet_template.render(**ctx)
     cprint.ok(content)
 
