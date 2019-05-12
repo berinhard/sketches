@@ -76,7 +76,8 @@ def export_to_video(sketch_name, frame_rate, output, clean_after):
 @click.argument('sketch_name')
 @click.option('--title', '-t', default='')
 @click.option('--cover', '-c', default='cover.png')
-def update_index_with_sketch(sketch_name, title, cover):
+@click.option('--pyp5js/--no-pyp5js', default=False)
+def update_index_with_sketch(sketch_name, title, cover, pyp5js):
     """
     Updates index.html with new the new sketch
     """
@@ -92,7 +93,11 @@ def update_index_with_sketch(sketch_name, title, cover):
         desc_ptbr = input("Entre com a descrição do sketch (PT-BR): ").strip()
 
     title = title or f'#{sketch_name}'
-    template = templates.get_template('new_entry_snippet.html')
+    if pyp5js:
+        template = templates.get_template('new_pyp5js_entry_snippet.html')
+    else:
+        template = templates.get_template('new_entry_snippet.html')
+
     today = date.today()
     ctx = {
         'sketch_id': sketch_name,
