@@ -3,7 +3,7 @@ daily sketch - {{ eng_desc }} / {{ pt_desc }}
 {% if pyp5js %}
 Live demo https://berinhard.github.io/sketches/{{ name }}
 
-Done with #pyp5js #python
+Created with #pyp5js #python
 {% else %}
 #python code https://berinhard.github.io/sketches/#{{ name }}
 {% endif %}

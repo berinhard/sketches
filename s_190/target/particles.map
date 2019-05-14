@@ -1,0 +1,8 @@
+{
+	"version": 3,
+	"file": "particles.js",
+	"sources": [
+		"particles.py"
+	],
+	"mappings": "AAAA;AAAA;AAAA;AAAA;AAGA;AAAA;AAEA;AAGA;AAIA;AAAA;AAGA;AACA;AAAA;AAEA;AACA;AAAA;AAEA;AACA;AAAA;AAAA;AAtBA"
+}
