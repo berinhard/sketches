@@ -18,11 +18,12 @@ z_values = range(-200, main_cube_size - 200, inner_cube_size)
 
 def setup():
     size(800, 800, P3D)
-    background(27)
+    background(27, 27, 27, 30)
     for x in x_values:
         for y in y_values:
             for z in z_values:
                 cubes.append(InnerCube(x, y, z, prob=random(1)))
+    #frameRate(36)
 
 
 class InnerCube(object):
@@ -32,20 +33,12 @@ class InnerCube(object):
         self.y = y
         self.z = z
         self.prob = prob
-        self.shine = random(2, 8)
 
     def display(self):
         if noise(frameCount * 0.01) ** 4 < self.prob:
             return
-
-        r = map(self.x, -200, main_cube_size - 200, 0, 255)
-        g = map(self.y, -200, main_cube_size - 200, 0, 255)
-        b = map(self.z, -200, main_cube_size - 200, 0, 255)
-        stroke(230, 230, 230, 30)
         noFill()
-        shininess(self.shine)
 
-        fill(r, g, b)
         with pushMatrix():
             rotateX(frameCount * 0.01)
             rotateY(frameCount * 0.01)
@@ -55,16 +48,16 @@ class InnerCube(object):
 
 
 def draw():
-    strokeWeight(5)
-    stroke(238, 238, 238, 30)
+    fill(27, 27, 27, 50)
+    noStroke()
+    box(width * 2)
 
-    directionalLight(
-        map(noise(frameCount * 0.08), 0, 1, 40, 255),
-        map(noise(frameCount * 0.02), 0, 1, 40, 255),
-        map(noise(frameCount * 0.042), 0, 1, 40, 255),
-        0, 0, -10
-    )
+    noFill()
+    strokeWeight(3)
+    stroke(238, 238, 238, 50)
 
-    translate(400, 400, map(noise(frameCount * 0.2), 0, 1, -100, 100))
+    translate(400, 400, 0)
     for cube in cubes:
         cube.display()
+
+    #save_video_frames(60, 36)
