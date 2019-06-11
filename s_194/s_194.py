@@ -1,3 +1,7 @@
+# Author: Berin
+# Sketches repo: https://github.com/berinhard/sketches
+# Live demo: https://berinhard.github.io/sketches/s_194/
+# Created with https://github.com/berinhard/pyp5js
 from pytop5js import *
 
 
