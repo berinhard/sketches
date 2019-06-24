@@ -19,11 +19,7 @@ class Fragment:
         self.pos = PVector(width / 2, height / 2)
         self.direction = PVector.random2D()
         self.direction.mult(0.5)
-        self._stop = False
-
-    @property
-    def hit_bottom(self):
-        return self._stop
+        self.hit_bottom = False
 
     def dist(self, fragment):
         dx = fragment.pos.x - self.pos.x
@@ -38,13 +34,13 @@ class Fragment:
             self.move()
 
             if self.pos.dist(PVector(width/2, height/2)) >= from_center:
-                self._stop = True
+                self.hit_bottom = True
                 return
 
             for b in bottom:
                 distance = self.dist(b)
                 if distance <= d * (d / 2):
-                    self._stop = True
+                    self.hit_bottom = True
                     break
 
     def display(self):
