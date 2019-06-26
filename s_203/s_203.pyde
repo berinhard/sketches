@@ -10,13 +10,13 @@ from berin import easings
 from copy import deepcopy
 from collections import namedtuple
 
-grid = []
-next_grid = []
+grid = {}
+prev = {}
 
 dA = 1
 dB = 0.5
-feed = 0.065
-kill = 0.042
+feed = 0.055
+kill = 0.062
 
 
 class CellDist(object):
@@ -27,86 +27,78 @@ class CellDist(object):
 
 
 def setup():
-    size(300, 300)
+    size(200, 200)
 
-    for x in range(width):
-        grid.append([])
-        for y in range(height):
+    for x in xrange(width):
+        for y in xrange(height):
             a, b = 1.0, 0.0
-            grid[x].append(CellDist(a, b))
+            grid[(x, y)] = CellDist(a, b)
+            prev[(x, y)] = CellDist(a, b)
 
-    for i in range(10):
+    for i in xrange(10):
         start_x = int(random(20, width - 20))
         start_y = int(random(20, height - 20))
 
-        for x in range(start_x, start_x + 10):
-            for y in range(start_y, start_y + 10):
+        for x in xrange(start_x, start_x + 10):
+            for y in xrange(start_y, start_y + 10):
                 a, b = 1.0, 1.0
-                grid[x][y] = CellDist(a, b)
-
-
-def new_dist_for(i, j):
-    spot = grid[i][j]
-
-    a, b = spot.a, spot.b
-
-    laplaceA = 0
-    laplaceA += a * -1
-    laplaceA += grid[i+1][j].a * 0.2
-    laplaceA += grid[i-1][j].a * 0.2
-    laplaceA += grid[i][j+1].a * 0.2
-    laplaceA += grid[i][j-1].a * 0.2
-    laplaceA += grid[i-1][j-1].a * 0.05
-    laplaceA += grid[i+1][j-1].a * 0.05
-    laplaceA += grid[i-1][j+1].a * 0.05
-    laplaceA += grid[i+1][j+1].a * 0.05
-
-    laplaceB = 0
-    laplaceB += b * -1
-    laplaceB += grid[i+1][j].b * 0.2
-    laplaceB += grid[i-1][j].b * 0.2
-    laplaceB += grid[i][j+1].b * 0.2
-    laplaceB += grid[i][j-1].b * 0.2
-    laplaceB += grid[i-1][j-1].b * 0.05
-    laplaceB += grid[i+1][j-1].b * 0.05
-    laplaceB += grid[i-1][j+1].b * 0.05
-    laplaceB += grid[i+1][j+1].b * 0.05
-
-    new_a = a + (dA*laplaceA - a*b*b + feed*(1-a))*1
-    new_b = b + (dB*laplaceB + a*b*b - (kill+feed)*b)*1
-
-    return constrain(new_a, 0, 1), constrain(new_b, 0, 1)
-
+                grid[(x, y)] = CellDist(a, b)
+                prev[(x, y)] = CellDist(a, b)
 
 def draw():
-    global grid
+    global prev
 
-    new_grid = []
-    for x in range(0, width):
-        new_grid.append([])
-        for y in range(0, height):
-            border_conditions = [
+    for x in xrange(0, width):
+        for y in xrange(0, height):
+            k = (x, y)
+            spot = prev[k]
+            a, b = spot.a, spot.b
+            if not any([
                 x == 0,
                 x == width - 1,
                 y == 0,
                 y == height - 1,
-            ]
-            if any(border_conditions):
-                spot = grid[x][y]
+            ]):
                 a, b = spot.a, spot.b
-            else:
-                a, b = new_dist_for(x, y)
-            new_grid[x].append(CellDist(a, b))
+                i, j = x, y
 
-    grid = new_grid
+                laplaceA = 0
+                laplaceA += a * -1
+                laplaceA += prev[(i+1, j)].a * 0.2
+                laplaceA += prev[(i-1, j)].a * 0.2
+                laplaceA += prev[(i, j+1)].a * 0.2
+                laplaceA += prev[(i, j-1)].a * 0.2
+                laplaceA += prev[(i-1, j-1)].a * 0.05
+                laplaceA += prev[(i+1, j-1)].a * 0.05
+                laplaceA += prev[(i-1, j+1)].a * 0.05
+                laplaceA += prev[(i+1, j+1)].a * 0.05
+
+                laplaceB = 0
+                laplaceB += b * -1
+                laplaceB += prev[(i+1, j)].b * 0.2
+                laplaceB += prev[(i-1, j)].b * 0.2
+                laplaceB += prev[(i, j+1)].b * 0.2
+                laplaceB += prev[(i, j-1)].b * 0.2
+                laplaceB += prev[(i-1, j-1)].b * 0.05
+                laplaceB += prev[(i+1, j-1)].b * 0.05
+                laplaceB += prev[(i-1, j+1)].b * 0.05
+                laplaceB += prev[(i+1, j+1)].b * 0.05
+
+                new_a = a + (dA*laplaceA - a*b*b + feed*(1-a))*1
+                new_b = b + (dB*laplaceB + a*b*b - (kill+feed)*b)*1
+
+                a, b = constrain(new_a, 0, 1), constrain(new_b, 0, 1)
+            grid[k].a = a
+            grid[k].b = b
+
+    prev = grid
+
     loadPixels()
-
-    for x in range(1, width - 1):
-        for y in range(1, height - 1):
-            cell = grid[x][y]
+    for x in xrange(1, width - 1):
+        for y in xrange(1, height - 1):
+            cell = grid[(x, y)]
             a, b = cell.a, cell.b
             pos = x + y * width
             pixels[pos] = color((a-b) * 255)
 
     updatePixels()
-    print(frameCount)
