@@ -5,4 +5,4 @@ Live demo https://berinhard.github.io/sketches/{{ name }}/
 Created with #pyp5js #python{% else %}
 #python code https://berinhard.github.io/sketches/#{{ name }}{% endif %}
 
-#processing #creativecoding #dailysketch #dailyart #sketchaday #generative #generativeart {% if pyp5js %}#p5js{% endif %}
+#processing #creativecoding #dailysketch #dailyart #sketchaday #generative #generativeart {% if pyp5js %}#p5js{% endif %} #dailyCoding
