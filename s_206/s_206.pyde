@@ -24,6 +24,7 @@ def init_angles(count):
         angles.append(random(TWO_PI))
 
     angles.sort()
+    frameRate(12)
 
 
 def setup():
@@ -49,10 +50,6 @@ def draw():
             draw_shape([points[-1]] + points + [points[0]], end_shape_mode=CLOSE, vertex_func=curveVertex)
 
     print(frameRate)
-    save_video_frames(24, 60)
-
-    if not frameCount % (24 * 5):
-        init_angles(int(random(3, 10)))
 
 
 def keyPressed():
