@@ -70,9 +70,10 @@ def init_blocks():
     frontier = BlocksFrontier()
 
 def setup():
-    size(600, 600)
+    #size(600, 600)
+    fullScreen()
     init_blocks()
-    #frameRate(24)
+    frameRate(24)
 
 def draw():
     background(27)
@@ -99,4 +100,4 @@ def draw():
         frontier.display()
 
     print(frameRate)
-    save_video_frames(24, 60)
+    #save_video_frames(24, 60)
