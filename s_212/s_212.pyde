@@ -100,7 +100,7 @@ conway.initialize()
 def setup():
     size(dimension, dimension)
     noStroke()
-#    frameRate(10)
+    frameRate(10)
     background(BLACK)
 
 
@@ -111,7 +111,7 @@ def draw():
     conway.display()
     #print(frameRate)
 
-    save_video_frames(24, 30)
+    #save_video_frames(24, 30)
 
     if not frameCount % (24 * 15):
         global colors
