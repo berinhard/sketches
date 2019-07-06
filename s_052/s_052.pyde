@@ -3,7 +3,7 @@
 
 from random import choice, shuffle
 
-WHITE = color(235)  
+WHITE = color(235)
 RED = color(181, 32, 10)
 BLACK = color(27, 27, 27)
 GOLDEN = color(218, 145, 32)
@@ -19,28 +19,32 @@ def setup():
     positions = range(-100, width / 2, line_space)
     colors = [choice(COLORS) for p in positions]
 
-    
+
 def draw():
     global positions, colors
     if not (frameCount - 1) % 200:
         colors = [choice(COLORS) for p in positions]
-    
-    background(GREEN)            
+
+    background(GREEN)
     for i, x in enumerate(positions):
         noise_scale = 54.0
         n = noise((frameCount + i) / noise_scale)
         print("Noise: {}".format(n))
         x_offset = map(n, 0, 1, 0, 100)
-        x += x_offset         
-        
+        x += x_offset
+
         c = colors[i]
         stroke(c)
         y = x
         line(x, 0, 0, y)
         line(width - x, 0, width, y)
-        
-        line(x, height, 0, height - y)        
+
+        line(x, height, 0, height - y)
         line(width - x, height, width, height - y)
-        
+
     #noLoop()
     #save_video_frames(30, 60 * 10)
+
+def keyPressed():
+    if key == 's':
+        saveFrame("#######.png")

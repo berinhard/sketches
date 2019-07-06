@@ -87,7 +87,7 @@ def setup():
     noStroke()
     new_polygon()
     #frameRate(24)
-    stroke(WHITE)
+    stroke(choice(COLORS))
 
 
 def draw():
@@ -109,12 +109,10 @@ def draw():
     move_x += 1
     move_y += 1
 
-    save_video_frames(60, 2 * 60)
-
     if move_x > width + 500:
         stroke(choice(COLORS))
+        saveFrame("cover.png")
         refresh_polygon()
-        saveFrame("final-#########.png")
 
 
 def refresh_polygon():
