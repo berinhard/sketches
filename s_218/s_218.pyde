@@ -9,8 +9,6 @@ from berin.shapes import regular_polygon, draw_shape, lines_intersection, Inters
 from berin import easings
 
 
-colors = get_color_palette()
-
 
 def setup():
     size(1000, 400)
@@ -24,8 +22,6 @@ x = 0
 step = 20
 def draw():
     global x, px, py
-    #if frameCount > 1:
-     #   noLoop()
 
     step = 50
     for base_y in range(0, height + step, step):
@@ -40,9 +36,6 @@ def draw():
                 y = random(0, percent_from_center) * max_y
                 line(x - step, 0, x, y)
                 line(x, y, x + step, 0)
-
-                #px, py = x, y
-                #x += step
 
     noLoop()
 
