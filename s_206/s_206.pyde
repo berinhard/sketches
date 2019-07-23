@@ -28,7 +28,8 @@ def init_angles(count):
 
 
 def setup():
-    size(1000, 1000)
+    #size(1000, 1000)
+    fullScreen()
     init_angles(7)
     strokeWeight(4)
     stroke(27, 27, 27, 130)
@@ -48,6 +49,9 @@ def draw():
 
             fill(next(colors))
             draw_shape([points[-1]] + points + [points[0]], end_shape_mode=CLOSE, vertex_func=curveVertex)
+
+    if not frameCount % (12 * 5):
+        init_angles(int(random(3, 10)))
 
     print(frameRate)
 

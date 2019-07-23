@@ -21,7 +21,7 @@ class SplitedCircle(object):
         self.slice_angle = TWO_PI / num_slices
         self.slice_angles = [i * self.slice_angle for i in range(num_slices + 1)]
         self.current_angle = 0
-        self.angle_inc = TWO_PI / (r * 2)
+        self.angle_inc = TWO_PI / (r)
         #self.invert_rotation
         self.speed = PVector(random(-5, 5), random(-3, 3))
         #self._reference = None
