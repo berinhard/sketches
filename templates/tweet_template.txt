@@ -1,4 +1,4 @@
-daily sketch - {{ eng_desc }} / {{ pt_desc }}
+new sketch - {{ eng_desc }} / {{ pt_desc }}
 {% if pyp5js %}
 Live demo https://berinhard.github.io/sketches/{{ name }}/
 
