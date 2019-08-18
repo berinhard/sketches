@@ -9,7 +9,8 @@ add_library('oscP5')
 oscP5 = None
 
 def setup():
-    fullScreen()
+    #fullScreen()
+    size(900, 900)
     background(255)
     global oscP5
     oscP5 = OscP5(this, 12000)
@@ -24,7 +25,7 @@ freqs = set()
 def draw():
     background(27)
     display_bass()
-    display_bass_2()
+    #display_bass_2()
     display_pads()    
     display_keys()
     
