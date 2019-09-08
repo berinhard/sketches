@@ -10,7 +10,7 @@ COLORS = get_color_palette()
 
 
 def setup():
-    size(900, 900)
+    size(int(900*4.166),int(900*4.166))
     rects_to_draw.append((0, 0, 900, 900))
     fill(WHITE)
     stroke(BLACK)
@@ -19,10 +19,11 @@ def setup():
 
 
 def draw():
+    scale(300/72.0)
+
     next_rects = []
 
     if not rects_to_draw:
-        saveFrame("#######.png")
         noLoop()
 
     while rects_to_draw:
@@ -78,12 +79,29 @@ def draw():
         rects_to_draw.append(x)
 
 
+def _redraw():
+    global rects_to_draw
+    rects_to_draw = [(0, 0, width, height)]
+    #COLORS = get_color_palette()
+    loop()
+    redraw()
+
+
 def keyPressed():
-    if key == 'n':
-        global COLORS, rects_to_draw
-
-        rects_to_draw = [(0, 0, width, height)]
+    global COLORS
+    if key == 'z':
         COLORS = get_color_palette()
-
-        loop()
-        redraw()
+        _redraw()
+    if key == 'n':
+        _redraw()
+    if key == 'x':
+        COLORS = ['#680a1d', '#3f1719', '#fcef9c', '#e8b666', '#ba2339']
+        _redraw()
+    if key == 'c':
+        #COLORS = ['#031c30', '#5a3546', '#b5485f', '#fc6747', '#fa8d3b']
+        COLORS = ['#75727a', '#997f87', '#b88c87', '#d39679', '#f3a76d']
+        _redraw()
+    if key == 's':
+        name = str(COLORS)
+        print(name)
+        saveFrame("#####{}.png".format(name))

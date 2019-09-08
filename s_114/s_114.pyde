@@ -1,38 +1,20 @@
 # Author: Berin
 # Sketches repo: https://github.com/berinhard/sketches
 from random import choice
+from berin.palettes import get_color_palette
 
-
-colors_1 = [
-    color(8,61,95),
-    color(0,166,182),
-    color(55,189,182),
-    color(156,205,175),
-    color(190,210,173),
-]
-colors_2 = [
-    color(15,154,250),
-    color(254,200,4),
-    color(242,99,34),
-    color(122,45,89),
-    color(24,27,70),
-]
-colors_3 = [
-    color(74,133,184),
-    color(228,238,242),
-    color(121,184,74),
-    color(154,189,229),
-    color(236,207,70),
-]
+COLORS = get_color_palette()
 
 def setup():
     #size(900, 900)
-    size(2560, 1080)
+    size(int(900*4.166),int(900*4.166))
     noStroke()
     rectMode(CENTER)
     background(0)
 
 def draw():
+    scale(300/72.0)
+
     square_sizes = range(50, 300, 25)
     square_positions_x = range(0, width, 25)
     square_positions_y = range(0, height, 25)
@@ -57,11 +39,34 @@ def draw():
         else:
             rect(10, 0, d, d)
 
-        fill(choice(colors_3))
+        fill(choice(COLORS))
         rect(0, 0, d, d)
 
+    print(frameCount)
+
+def _redraw():
+    background(0)
+    redraw()
+
+
 def keyPressed():
-    if key == 's':
-        saveFrame("######.png")
+    global COLORS
+    if key == 'z':
+        COLORS = get_color_palette()
+        _redraw()
     if key == 'n':
-        noLoop()
+        _redraw()
+    if key == '1':
+        COLORS = ['#a2825c', '#88d3ab', '#f9fad2', '#f5da7a', '#ff985e', '#ff985e', '#ff985e', '#ff985e', '#ff985e']  # marrom, azul, bege, amarelo, laranja
+        _redraw()
+    if key == '2':
+        COLORS = ['#a2825c', '#88d3ab', '#f9fad2', '#f9fad2', '#f9fad2', '#f9fad2', '#f5da7a', '#ff985e']  # marrom, azul, bege, amarelo, laranja
+        _redraw()
+    if key == '3':
+        COLORS = ['#a2825c', '#88d3ab', '#88d3ab', '#88d3ab', '#88d3ab', '#88d3ab', '#f9fad2', '#f5da7a', '#ff985e']  # marrom, azul, bege, amarelo, laranja
+        _redraw()
+    if key == 's':
+        saveFrame("#####.png")
+
+    name = str(COLORS)
+    print(name)

@@ -24,8 +24,8 @@ freqs = set()
 
 def draw():
     background(27)
-    display_bass()
-    #display_bass_2()
+    #display_bass()
+    display_bass_2()
     display_pads()    
     display_keys()
     
@@ -96,12 +96,7 @@ def stop():
     global oscP5
     oscP5.dispose()
     
-# colors = [
-#     color(0, 153, 204),
-#     color(  204, 255, 204 ),
-#     color( 102, 204, 255 ),
-#     color( 0, 51, 153 ),    
-# ]
+
 colors = get_color_palette()
 
 class Particle(object):
@@ -135,6 +130,7 @@ class MyOscListener(OscEventListener):
         global freq 
         args = m.arguments()
         valid_instruments = ['bass', 'pads', 'sawbass', 'keys']
+        
         if str(args[0]) not in valid_instruments:
             return
         

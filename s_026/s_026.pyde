@@ -3,10 +3,10 @@
 
 from random import choice
 
-WIDTH, HEIGHT = 1200, 700
-current_height = HEIGHT - 100
+WIDTH, HEIGHT = 1200, 1200
+current_height = HEIGHT - 400
 current_width = 0
-min_limit = 0 
+min_limit = 0
 
 PALETTE_1 = [
     (255,171,69),
@@ -44,7 +44,7 @@ def init_board():
 
 def keyPressed():
     global COLORS, min_limit
-    
+
     if key == '1':
         init_board()
         COLORS = PALETTE_1
@@ -53,15 +53,15 @@ def keyPressed():
         COLORS = PALETTE_2
     elif key == '3':
         init_board()
-        COLORS = PALETTE_3        
+        COLORS = PALETTE_3
 
 def setup():
     global WIDTH, HEIGHT, COLORS
     size(WIDTH, HEIGHT)
     frameRate(25)
-    COLORS = PALETTE_2
+    COLORS = PALETTE_3
     init_board()
-        
+
 def draw():
     global current_width, current_height, limit_by_height, min_limit
     if not limit_by_height:
@@ -70,25 +70,27 @@ def draw():
 
     current_height = max(limit_by_height)
     current_width, width_limit = limit_by_height[current_height]
-          
+
     max_width = width_limit if width_limit > 10 else 200
-    diff_width = map(noise(frameCount * 0.1) / 2, 0, 1, 0, max_width)
+    #diff_width = #map(noise(frameCount * 0.1) / 2, 0, 1, 0, max_width)
+    diff_width = map(random(1) ** 1.8, 0, 1, max_width, 20)
     if diff_width > width_limit - 10:
         diff_width = width_limit
-                    
-    x, y = current_width, current_height - map(random(1), 0, 1, 50, 200)
+
+    x, y = current_width, current_height - map(random(1), 0, 1, 75, 200)
     w, h = diff_width, current_height - y
-    
+
     c = sorted(COLORS)[frameCount % len(COLORS)]
-    stroke(*c)
+    stroke(27)
+    strokeWeight(9)
     fill(*c)
     rect(x, y, w, h)
-    
+
     new_width, new_limit = current_width + diff_width, width_limit - diff_width
     if new_limit < 1:
-        limit_by_height.pop(current_height)    
+        limit_by_height.pop(current_height)
     else:
         limit_by_height[current_height] = (new_width, new_limit)
-    
+
     if y >= 0:
         limit_by_height[y] = (x, w)
