@@ -19,7 +19,7 @@ class LineWalker():
         self.move_forward = True
         self.color = color(27)
         self.weight = 3
-        if random(1) > 0.92:
+        if random(1) > 0.87:
             self.color = color(212, 23, 49)
             self.weight = 6
         self.current_angle = 0
@@ -62,7 +62,8 @@ def init_sketch(background_color=None):
         background(242)
 
 def setup():
-    size(900, 900)
+    #size(900, 900)
+    size(1280, 720)
     frameRate(5)
     init_sketch(27)
 
