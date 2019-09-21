@@ -11,6 +11,9 @@ from berin import easings
 from random import choice
 
 
+# patterns' reference: https://twitter.com/takawo/status/1173395633186557953
+
+
 def pattern_1(d, angle=0):
     rotate(angle)
     h = d / 2
