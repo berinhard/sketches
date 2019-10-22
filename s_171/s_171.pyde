@@ -113,5 +113,5 @@ def setup():
 
 def draw():
     grid.display()
-    saveFrame("cover.png")
-    noLoop()
+    #saveFrame("cover.png")
+    #noLoop()
