@@ -109,8 +109,8 @@ class KeysDisplay1(object):
         self.key_strokes = []
 
     def update(self, synth_data):
-        if synth_data['name'] == 'keys':
-            if len(self.key_strokes) < 1000:
+        if synth_data['name'] in ['keys', 'piano']:
+            if len(self.key_strokes) < 500:
                 self.key_strokes.append(
                     [int(random(height)), int(random(100, 600))]
                 )

@@ -15,7 +15,7 @@ def setup():
     loc = NetAddress('127.0.0.1', 12000)
     
     #fullScreen()
-    size(900, 900)
+    size(1024, 768)
     background(255)
     
         
@@ -91,7 +91,7 @@ class MyOscListener(OscEventListener):
             if isinstance(value, unicode):
                 synth_data[value] = args[offset + i + 1]
                 
-        print(u"Processing: " + synth_data['name'] + u' - Frequency: ' + str(synth_data['freq']))
+        print(u"Processing: " + synth_data['name'] + u' - Frequency: ' + str(synth_data.get('freq', 0)))
         synths_deque.appendleft(synth_data)                
 
 def stop():
