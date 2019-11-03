@@ -29,7 +29,12 @@ class Particula(object):
 
     def desenha(self, outra):
         strokeWeight(5)
-        stroke(self.cor)
+        r, g, b = red(self.cor), blue(self.cor), green(self.cor)
+        max_dist = sqrt(width ** 2 + height ** 2)
+        a = map(
+            dist(self.pos_x, self.pos_y, outra.pos_x, outra.pos_y), 0, max_dist, 10, 0
+        )
+        stroke(r, g, b, a)
         line(
             self.pos_x,
             self.pos_y,
