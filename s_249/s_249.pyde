@@ -50,7 +50,7 @@ def draw_sentence(x, y, tam, angle):
         elif c == ']':
             popMatrix()
         elif c == '?':
-            if random(1 > 0.1):
+            if random(1) > 0.5:
                 rotate(angle)
             else:
                 rotate(-angle)
