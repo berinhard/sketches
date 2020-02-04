@@ -9,7 +9,6 @@ HEIGHT = 1024
 CELL_SIZE = 16  #pixels
 
 final_image = Image.new('RGB', (WIDTH, HEIGHT))
-draw = ImageDraw.Draw(final_image)
 
 for x in range(0, WIDTH, CELL_SIZE):
     for y in range(0, HEIGHT, CELL_SIZE):
