@@ -1,14 +1,9 @@
 # Author: Berin
 # Sketches repo: https://github.com/berinhard/sketches
 # berin lib: https://github.com/berinhard/berin/
-from berin.coords import draw_at_center, polar_coordinate
-from berin.grids import VirtualGrid
-from berin.palettes import get_color_palette
-from berin.save_frames import save_video_frames
-from berin.shapes import regular_polygon, draw_shape, lines_intersection, IntersectionLine
-from berin import easings
-
 from random import choice
+
+SCALE = 1
 
 
 axiom = 'F'
@@ -31,7 +26,7 @@ def generate():
 
     print('drawing new generation...')
     refresh_draw()
-    print('done!')
+    print('done! new sentence len: ' + str(len(sentence)))
 
 
 def draw_sentence(x, y, tam, angle):
@@ -50,41 +45,43 @@ def draw_sentence(x, y, tam, angle):
         elif c == ']':
             popMatrix()
 
-tam = 200
+tam = 260 * SCALE
 def refresh_draw():
     global tam
-    offset = 100
+    offset = 200 * SCALE
     angle = (PI / 12)
-    tam *= 0.5
+    tam *= 0.505
     alpha = 5
 
     background(42)
-    strokeWeight(3)
+    strokeWeight(3 * SCALE)
     strokeCap(ROUND)
 
+    print("\tDrawing tree 01...")
     resetMatrix()
-    stroke(240, alpha)
+    stroke(235, 222, 205, alpha)
     draw_sentence(0, height / 2 + offset, tam, angle)
 
+    print("\tDrawing tree 02...")
     resetMatrix()
-    stroke(231, 42, 39, alpha)
+    stroke(29, 117, 105, alpha)
     draw_sentence(width, height / 2 - offset, -tam, angle)
 
+
+add_library('svg')
 def setup():
-    size(900, 900)
-    print(sentence)
-    generate()
+    size(1200 * SCALE, 1200 * SCALE)
+    scale(SCALE)
 
 def mouseClicked():
-    generate()
+    redraw()
 
 def draw():
-    pass
+    #print(sentence)
 
-
-c = 1
-def keyPressed():
-    global c
-    if key == 's':
-        saveFrame(str(c) + '.png')
-        c += 1
+    f = createGraphics(width, height, SVG, "out.svg")
+    beginRecord(f)
+    generate()
+    saveFrame("#########.png")
+    noLoop()
+    endRecord()
