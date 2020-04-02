@@ -81,8 +81,6 @@ def draw():
         else:
             attempts -= 1
 
-    print frameCount, attempts
-
 
 def keyPressed():
     if key == 's':
