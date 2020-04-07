@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # Author: Berin
 # Sketches repo: https://github.com/berinhard/sketches
 # berin lib: https://github.com/berinhard/berin/
