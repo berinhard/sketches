@@ -22,7 +22,7 @@ def setup():
     strokeWeight(2)
     stroke(0)
     rectMode(CENTER)
-    #background(240)
+    background(240)
 
 def keyPressed():
     if key == 's':
