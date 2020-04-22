@@ -9,6 +9,7 @@ from berin.save_frames import save_video_frames
 from berin.shapes import regular_polygon, draw_shape, lines_intersection, IntersectionLine
 from berin import easings
 
+import itertools
 from random import choice
 
 
