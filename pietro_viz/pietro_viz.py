@@ -3,12 +3,14 @@
 
 from pattern_1 import Pattern1
 from pattern_2 import Pattern2
+from pattern_3 import Pattern3
 
 from random import choice
 
 patterns = {
     '1': Pattern1(),
     '2': Pattern2(),
+    '3': Pattern3(),
 }
 
 active_pattern = choice(patterns.values())
