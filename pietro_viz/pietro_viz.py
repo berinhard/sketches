@@ -21,7 +21,11 @@ def setup():
 
 
 def draw():
+    global active_pattern
     active_pattern.draw_loop()
+    if random(1) > 0.998:
+        active_pattern = choice(patterns.values())
+        active_pattern.prepare()
 
 
 def keyPressed():
