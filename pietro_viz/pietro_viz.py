@@ -4,6 +4,7 @@
 from pattern_1 import Pattern1
 from pattern_2 import Pattern2
 from pattern_3 import Pattern3
+from pattern_4 import Pattern4
 
 from random import choice
 
@@ -11,9 +12,11 @@ patterns = {
     '1': Pattern1(),
     '2': Pattern2(),
     '3': Pattern3(),
+    '4': Pattern4(),
 }
 
 active_pattern = choice(patterns.values())
+#active_pattern = patterns['4']
 
 def setup():
     fullScreen()
