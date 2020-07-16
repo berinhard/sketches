@@ -18,6 +18,7 @@ patterns = {
 }
 
 active_pattern = choice(patterns.values())
+#active_pattern = patterns['4']
 
 def setup():
     fullScreen()
@@ -27,8 +28,11 @@ def setup():
 def draw():
     global active_pattern
     active_pattern.draw_loop()
-    if random(1) > 0.998:
-        active_pattern = choice(patterns.values())
+    if random(1) > 0.9985:
+        new_pattern = choice(patterns.values())
+        while new_pattern == active_pattern:
+            new_pattern = choice(patterns.values())
+        active_pattern = new_pattern
         active_pattern.prepare()
 
 

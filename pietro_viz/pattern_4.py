@@ -14,7 +14,7 @@ class Walker(object):
         self.step_size = step_size
         self.c = [c_list.next() for i in range(n)]
         self.dist = 0
-        self.dist_off = choice(range(1, 5))
+        self.dist_off = choice(range(1, 4))
 
         d_args = [
             (step_size, step_size),
@@ -84,17 +84,8 @@ class Pattern4(object):
     def draw_loop(self):
         background(27)
 
-        centers = [
-            (width/4, height/4),
-            (3*width/4, height/4),
-            (width/4, 3*height/4),
-            (3*width/4, 3*height/4),
-            (width/2, height/2),
-            (3*width/8, 3*height/8),
-            (5*width/8, 3*height/8),
-            (3*width/8, 5*height/8),
-            (5*width/8, 5*height/8),
-        ]
+        self.x_values = range(0, width + self.cell_size, self.cell_size)
+        self.y_values = range(0, height + self.cell_size, self.cell_size)
 
         for w in self.fixed:
             w.draw()
@@ -107,7 +98,7 @@ class Pattern4(object):
                 fixed.append(w)
 
         if not frameCount % 10:
-            x, y = choice(centers)
+            x, y = choice(self.x_values), choice(self.y_values)
             self.new_walker(x, y, n=choice(range(1, 8)))
 
         for w in fixed:
