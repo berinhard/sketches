@@ -6,6 +6,7 @@ from pattern_2 import Pattern2
 from pattern_3 import Pattern3
 from pattern_4 import Pattern4
 from pattern_5 import Pattern5
+from pattern_6 import Pattern6
 
 from random import choice
 
@@ -15,6 +16,7 @@ patterns = {
     '3': Pattern3(),
     '4': Pattern4(),
     '5': Pattern5(),
+    '6': Pattern6(),
 }
 
 active_pattern = choice(patterns.values())
