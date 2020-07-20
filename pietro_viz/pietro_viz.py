@@ -19,8 +19,8 @@ patterns = {
     '6': Pattern6(),
 }
 
-active_pattern = choice(patterns.values())
-#active_pattern = patterns['4']
+#ctive_pattern = choice(patterns.values())
+active_pattern = patterns['6']
 
 def setup():
     fullScreen()
