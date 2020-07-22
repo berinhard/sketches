@@ -35,6 +35,7 @@ def configure_new_sketch(sketch_name):
         cprint.err(f"There's already a sketch \"{sketch_name}\"", interrupt=True)
 
     os.mkdir(new_dir)
+    os.mkdir(new_dir.child('results'))
     copyfile(base_sketch, new_sketch)
 
 @cli.command('export')

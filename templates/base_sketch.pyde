@@ -19,3 +19,8 @@ def setup():
 
 def draw():
     pass
+
+
+def keyPressed():
+    if key == 's':
+        saveFrame("results/######.png")
