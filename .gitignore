@@ -10,3 +10,5 @@ militares/data/*.otf
 results*
 *.autosave
 filhos_acaso/out*
+.idea
+__pycache__
