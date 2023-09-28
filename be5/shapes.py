@@ -3,6 +3,8 @@ from functools import cached_property
 
 import py5
 import random
+from be5.coords import polar_coordinate
+from be5.draw import draw_shape
 
 COLORS = [
     (232, 232, 53),
@@ -100,7 +102,6 @@ class MovingShape:
             new_target *= py5.random(100, 300)
             new_target += self.moving_point
             offset = 100
-            print(new_target.x, new_target.y)
             if not (offset <= new_target.x <= py5.width - offset):
                 new_target = None
             elif not offset <= new_target.y <= py5.height - offset:
@@ -129,3 +130,28 @@ class MovingShape:
         if debug and self.target:
             py5.stroke(255, 9, 255)
             py5.circle(self.target.x, self.target.y, 2)
+
+
+class WithCenterShape:
+
+    def __init__(self, center, radius, num_points, radius_noise=0, radius_off=0):
+        self.center = center
+        self.radius = radius
+        self.num_points = num_points
+        self.radius_noise = radius_noise
+        self.angle = py5.TWO_PI / self.num_points
+        self.off = radius_off
+
+    @property
+    def points(self):
+        for i in range(0, self.num_points + 1):
+            radius_off = py5.random(-self.off, self.off) * self.radius_noise
+            radius = self.radius + radius_off
+
+            angle = i * self.angle
+            yield polar_coordinate(
+                self.center.x, self.center.y, radius, angle
+            )
+
+    def draw(self):
+        draw_shape(self.points)
