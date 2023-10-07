@@ -16,7 +16,8 @@ LINE = (220, 220, 220, 10)
 C1 = (74, 94, 206)
 C2 = (21, 21, 21)
 
-COLORS = [C1, C2]
+# balance c1 or c3 qtd
+COLORS = [C1, C2, C2]
 
 class TriSquare(BaseTriSquare):
 
