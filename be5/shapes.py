@@ -25,6 +25,10 @@ class TriSquare:
         random.shuffle(colors)
         self.c1, self.c2 = colors
 
+    @property
+    def points(self):
+        return (self.v1, self.v2, self.v3, self.v4)
+
     def draw(self):
         py5.stroke_weight(1)
         py5.stroke(27, 27, 27, 100)
