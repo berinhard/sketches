@@ -100,6 +100,7 @@ def populate_shapes():
 
 def setup():
     py5.size(SIZE, SIZE, py5.P2D)
+    py5.begin_record(py5.SVG, 'output.svg')
     populate_shapes()
 
 def draw():
@@ -113,6 +114,9 @@ def draw():
             py5.save_frame("cover03.png")
         elif py5.key in ['n', "N"]:
             populate_shapes()
+
+    py5.end_record()
+    py5.no_loop()
 
 
 py5.run_sketch()

@@ -12,5 +12,7 @@ results*
 filhos_acaso/out*
 .idea
 __pycache__
+*.svg
+
 
 s_*/cover0*
