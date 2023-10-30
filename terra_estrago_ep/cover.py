@@ -2,8 +2,8 @@ import random
 
 import py5
 
-SIZE = 900
-BACKGROUND = (255, 255, 255)
+SIZE = 1200
+BACKGROUND = (242, 242, 242)
 
 
 TARGET = py5.Py5Vector(0, 0)
@@ -16,6 +16,8 @@ def polar_coordinate(x0, y0, r, angle):
     return py5.Py5Vector(x, y)
 
 
+import random
+
 class Particle:
 
     def __init__(self, x=None, y=None):
@@ -27,6 +29,9 @@ class Particle:
         self.is_following = False
         self.top_speed = py5.random(5, 10)
         self.previous = None
+        self.w = random.choice([0.5, 1, 1.5, 2, 2.5, 2.5, 2, 1.5, 1, 3])
+        self.b = int(py5.random(0, 60))
+        self.a = int(py5.random(160, 210))
 
     def move(self, target_pos=None):
         x, y = self.location.x, self.location.y
@@ -40,7 +45,7 @@ class Particle:
         self.is_following = True
 
         acc_multiplier = py5.Py5Vector.random(dim=2)
-        acc_multiplier *= py5.random(6)
+        acc_multiplier *= py5.random(3)
         acceleration += acc_multiplier
         acceleration.normalize()
         acceleration *= 0.2
@@ -54,8 +59,10 @@ class Particle:
         if not self.previous:
             return
 
-        py5.stroke_weight(1)
-        py5.stroke(42, 42, 42, 200)
+        py5.stroke_weight(self.w)
+        py5.stroke(self.b, self.b, self.b, self.a)
+        if self.w == 3:
+            py5.stroke(255 - 2 * self.b, self.b, self.b, self.a)
         x, y = self.location.x, self.location.y
         py5.line(x, y, self.previous.x, self.previous.y)
 
