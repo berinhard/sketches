@@ -10,6 +10,12 @@ import py5
 
 @dataclass
 class Tile:
+    """
+    This class represents a tile py5 image with its edge of possible connections.
+    The edges list represents what are the possible type of connection between this tile and their
+    neighbors. The position of the connection in edges list indicates the orientation of them.
+    """
+
     UP, RIGHT, DOWN, LEFT = 0, 1, 2, 3  # neighbors indexes for the edges list
 
     edges: list
@@ -42,7 +48,7 @@ class Tile:
 
     def rotate(self, counter):
         """
-        Rotate the image and edges by counter times and return an equivalent new Tile
+        Rotate the image and edges by counter times and return an equivalent new Tile with this data
         """
         w = self.image.width
         h = self.image.height
@@ -63,10 +69,16 @@ class Tile:
 
 @dataclass
 class Cell:
+    """
+    A cell represents an area from the grid that will have a tile addressed to it. The i, j are the
+    cell indexes within the grid and the tile attribute will be populated once this cell is
+    collapsed. The options list holds all the possible tiles that can be assigned for the cell.
+    """
+
     i: int
     j: int
     options: list
-    tile: Tile = None
+    tile: Tile = field(default=None, init=False)
 
     @property
     def collapsed(self):
@@ -76,10 +88,20 @@ class Cell:
         self.tile = random.choice(self.options)
 
     @property
-    def entrophy(self):
+    def entropy(self):
+        """
+        The entropy is the number of possible options which are still open for this cell
+        """
+        if self.collapsed:
+            return 0
         return len(self.options)
 
     def update_options(self, collapsed_cell):
+        """
+        Considering the collapsed cell, this method will determine the neighborhood orientation
+        between them and, accordingly to that, limit down the options considering the collapsed
+        adjacency rules.
+        """
         ref_tile = collapsed_cell.tile
         if self.i == collapsed_cell.i:
             if self.j > collapsed_cell.j:
@@ -96,12 +118,16 @@ class Cell:
 
 @dataclass
 class WaveFunctionCollapseGrid:
+    """
+    Class to represent a grid which will be populated by collapsing their cells.
+    """
+
     tiles: list
     dim: int
     pending_cells: list[Cell] = field(default=list, init=False)
 
     def __post_init__(self):
-        self.pending_cells = self.cells[:]
+        self.pending_cells = self.cells[:]  # copy of cells, so we can know which aren't collapsed
         random.shuffle(self.pending_cells)
 
     @property
@@ -115,21 +141,31 @@ class WaveFunctionCollapseGrid:
     @cached_property
     def cells(self):
         return [
-            Cell(i=i, j=j, options=self.tiles[:])
+            Cell(i=i, j=j, options=self.tiles[:])  # cells initialized with all tiles as possibles
             for i, j in product(range(0, py5.width // self.w), range(0, py5.height // self.h))
         ]
 
     def start(self):
+        """
+        To start the algorithm, we pick any random cell and collapse it since all of them have the
+        same set of possible tiles.
+        """
         cell = random.choice(self.cells)
         self.collapse_cell(cell)
 
     def collapse_cell(self, cell):
+        # defines the cell tile among their options
         cell.collapse()
+        # remove the collapsed cell from the pending ones list
         self.pending_cells.remove(cell)
+        # update all the neighbors cells options considering the collapse operation
         for neighbor_cell in self.get_neighbors(cell):
             neighbor_cell.update_options(collapsed_cell=cell)
 
     def get_neighbors(self, cell):
+        """
+        Given a cell, return its list of neighbors which still weren't collapsed.
+        """
         i, j = cell.i, cell.j
         positions = [
             (i, j - 1),
@@ -147,7 +183,10 @@ class WaveFunctionCollapseGrid:
         return not self.pending_cells
 
     def collapse(self):
-        next_cell = sorted(grid.pending_cells, key=lambda c: c.entrophy)[0]
+        """
+        Gets the next pending cell with the lowes entropy and collapses it
+        """
+        next_cell = sorted(grid.pending_cells, key=lambda c: c.entropy)[0]
         grid.collapse_cell(next_cell)
 
     def draw(self):
