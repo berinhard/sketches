@@ -7,13 +7,18 @@ from pathlib import Path
 
 import py5
 
-UP, RIGHT, DOWN, LEFT = 0, 1, 2, 3
 
 @dataclass
 class Tile:
+    UP, RIGHT, DOWN, LEFT = 0, 1, 2, 3  # neighbors indexes for the edges list
+
     edges: list
     filename: Path = ""
     p5_image: py5.Image = None
+
+    def __post_init__(self):
+        if not len(self.edges) == 4:
+            raise ValueError(f"Edges must be a list with 4 elements, got {len(self.edges)}")
 
     @cached_property
     def image(self):
@@ -23,19 +28,19 @@ class Tile:
 
     @property
     def up(self):
-        return self.edges[UP]
+        return self.edges[self.UP]
 
     @property
     def down(self):
-        return self.edges[DOWN]
+        return self.edges[self.DOWN]
 
     @property
     def left(self):
-        return self.edges[LEFT]
+        return self.edges[self.LEFT]
 
     @property
     def right(self):
-        return self.edges[RIGHT]
+        return self.edges[self.RIGHT]
 
     def rotate(self, counter):
         """
