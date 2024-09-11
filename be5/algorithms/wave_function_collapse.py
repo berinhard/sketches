@@ -133,7 +133,12 @@ class WaveFunctionCollapseGrid:
             (i - 1, j),
             (i + 1, j),
         ]
-        return [c for c in self.pending_cells if (c.i, c.j) in positions]
+
+        return [
+            c
+            for c in self.pending_cells
+            if all(((c.i == i or c.j == j), (c.i, c.j) in positions))
+        ]
 
     @property
     def complete(self):
@@ -171,7 +176,7 @@ def setup():
         ptr_2,
         ptr_2.rotate(1),
     ]
-    grid = WaveFunctionCollapseGrid(dim=20, tiles=tiles)
+    grid = WaveFunctionCollapseGrid(dim=40, tiles=tiles)
     grid.start()
 
 def draw():
