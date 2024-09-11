@@ -12,6 +12,7 @@ def setup():
     py5.size(1000, 1000)
 
     images_dir = Path(__file__).parents[1] / "be5" / "algorithms" / "tiles" / "polka"
+    images_dir = Path(__file__).parent / "polka"
     blank = Tile.from_file(images_dir / "0.png", edges=[0, 0, 0, 0])
     ptr_1 = Tile.from_file(images_dir / "1.png", edges=[0, 1, 1, 1])
     ptr_2 = Tile.from_file(images_dir / "2.png", edges=[0, 1, 0, 1])
@@ -36,6 +37,8 @@ def setup():
 def draw():
     grid.collapse()
     grid.draw()
+
+    py5.save_frame(f"{py5.frame_count:05d}.png")
 
     if grid.complete:
         print("finished!")
