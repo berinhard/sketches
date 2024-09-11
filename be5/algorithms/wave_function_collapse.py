@@ -59,6 +59,8 @@ class Tile:
         edges.rotate(counter)
 
         return Tile(image=new_image, edges=edges)
+
+
 @dataclass
 class Cell:
     i: int
@@ -91,6 +93,7 @@ class Cell:
                 cond = lambda tile: tile.right == ref_tile.left
         self.options = list(filter(cond, self.options))
 
+
 @dataclass
 class WaveFunctionCollapseGrid:
     tiles: list
@@ -113,7 +116,7 @@ class WaveFunctionCollapseGrid:
     def cells(self):
         return [
             Cell(i=i, j=j, options=self.tiles[:])
-            for i, j in product(range(0, py5.width // self.w), range(0,  py5.height // self.h))
+            for i, j in product(range(0, py5.width // self.w), range(0, py5.height // self.h))
         ]
 
     def start(self):
@@ -125,6 +128,7 @@ class WaveFunctionCollapseGrid:
         self.pending_cells.remove(cell)
         for neighbor_cell in self.get_neighbors(cell):
             neighbor_cell.update_options(collapsed_cell=cell)
+
     def get_neighbors(self, cell):
         i, j = cell.i, cell.j
         positions = [
@@ -135,9 +139,7 @@ class WaveFunctionCollapseGrid:
         ]
 
         return [
-            c
-            for c in self.pending_cells
-            if all(((c.i == i or c.j == j), (c.i, c.j) in positions))
+            c for c in self.pending_cells if all(((c.i == i or c.j == j), (c.i, c.j) in positions))
         ]
 
     @property
@@ -157,7 +159,10 @@ class WaveFunctionCollapseGrid:
                 py5.stroke(100)
                 py5.rect(cell.i * self.w, cell.j * self.h, self.w, self.h)
 
+
 grid = None
+
+
 def setup():
     global grid
     py5.size(800, 800)
@@ -179,6 +184,7 @@ def setup():
     grid = WaveFunctionCollapseGrid(dim=40, tiles=tiles)
     grid.start()
 
+
 def draw():
     grid.collapse()
     grid.draw()
@@ -186,5 +192,6 @@ def draw():
     if grid.complete:
         print("finished!")
         py5.no_loop()
+
 
 py5.run_sketch()
