@@ -13,18 +13,16 @@ class Tile:
     UP, RIGHT, DOWN, LEFT = 0, 1, 2, 3  # neighbors indexes for the edges list
 
     edges: list
-    filename: Path = ""
-    p5_image: py5.Image = None
+    image: py5.Image
 
     def __post_init__(self):
         if not len(self.edges) == 4:
             raise ValueError(f"Edges must be a list with 4 elements, got {len(self.edges)}")
 
-    @cached_property
-    def image(self):
-        if not self.p5_image:
-            self.p5_image = py5.load_image(str(self.filename.resolve()))
-        return self.p5_image
+    @classmethod
+    def from_file(cls, filename, **kwargs):
+        kwargs["image"] = py5.load_image(str(filename.resolve()))
+        return cls(**kwargs)
 
     @property
     def up(self):
@@ -60,7 +58,7 @@ class Tile:
         edges = deque(self.edges)
         edges.rotate(counter)
 
-        return Tile(p5_image=new_image, edges=edges)
+        return Tile(image=new_image, edges=edges)
 @dataclass
 class Cell:
     i: int
@@ -160,9 +158,9 @@ def setup():
     py5.size(800, 800)
 
     images_dir = Path.home() / "envs" / "sketches" / "be5" / "algorithms" / "tiles" / "demo"
-    blank = Tile(filename=images_dir / "0.png", edges=[0, 0, 0, 0])
-    ptr_1 = Tile(filename=images_dir / "1.png", edges=[0, 1, 1, 1])
-    ptr_2 = Tile(filename=images_dir / "2.png", edges=[0, 1, 0, 1])
+    blank = Tile.from_file(images_dir / "0.png", edges=[0, 0, 0, 0])
+    ptr_1 = Tile.from_file(images_dir / "1.png", edges=[0, 1, 1, 1])
+    ptr_2 = Tile.from_file(images_dir / "2.png", edges=[0, 1, 0, 1])
 
     tiles = [
         blank,
