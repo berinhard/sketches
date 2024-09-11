@@ -18,7 +18,21 @@ class Tile:
     def image(self):
         return py5.load_image(str(self.filename.resolve()))
 
+    @property
+    def up(self):
+        return self.edges[UP]
 
+    @property
+    def down(self):
+        return self.edges[DOWN]
+
+    @property
+    def left(self):
+        return self.edges[LEFT]
+
+    @property
+    def right(self):
+        return self.edges[RIGHT]
 @dataclass
 class Cell:
     i: int
@@ -41,14 +55,14 @@ class Cell:
         ref_tile = collapsed_cell.tile
         if self.i == collapsed_cell.i:
             if self.j > collapsed_cell.j:
-                cond = lambda tile: tile.edges[UP] == ref_tile.edges[DOWN]
+                cond = lambda tile: tile.up == ref_tile.down
             else:
-                cond = lambda tile: tile.edges[DOWN] == ref_tile.edges[UP]
+                cond = lambda tile: tile.down == ref_tile.up
         else:
             if self.i > collapsed_cell.i:
-                cond = lambda tile: tile.edges[LEFT] == ref_tile.edges[RIGHT]
+                cond = lambda tile: tile.left == ref_tile.right
             else:
-                cond = lambda tile: tile.edges[RIGHT] == ref_tile.edges[LEFT]
+                cond = lambda tile: tile.right == ref_tile.left
         self.options = list(filter(cond, self.options))
 
 @dataclass
