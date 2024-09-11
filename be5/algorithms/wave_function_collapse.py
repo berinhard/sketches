@@ -1,6 +1,6 @@
 import random
 from collections import deque
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from functools import cached_property
 from itertools import product
 from pathlib import Path
@@ -97,6 +97,11 @@ class Cell:
 class WaveFunctionCollapseGrid:
     tiles: list
     dim: int
+    pending_cells: list[Cell] = field(default=list, init=False)
+
+    def __post_init__(self):
+        self.pending_cells = self.cells[:]
+        random.shuffle(self.pending_cells)
 
     @property
     def w(self):
@@ -119,6 +124,7 @@ class WaveFunctionCollapseGrid:
 
     def collapse_cell(self, cell):
         cell.collapse()
+        self.pending_cells.remove(cell)
         for neighbor_cell in self.get_neighbors(cell):
             neighbor_cell.update_options(collapsed_cell=cell)
     def get_neighbors(self, cell):
@@ -132,15 +138,11 @@ class WaveFunctionCollapseGrid:
         return [c for c in self.pending_cells if (c.i, c.j) in positions]
 
     @property
-    def pending_cells(self):
-        return [c for c in self.cells if not c.collapsed]
-
-    @property
     def complete(self):
         return not self.pending_cells
 
     def collapse(self):
-        next_cell = next(iter(sorted(grid.pending_cells, key=lambda c: c.entrophy)))
+        next_cell = sorted(grid.pending_cells, key=lambda c: c.entrophy)[0]
         grid.collapse_cell(next_cell)
 
     def draw(self):
