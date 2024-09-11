@@ -1,4 +1,5 @@
 import random
+from collections import deque
 from dataclasses import dataclass
 from functools import cached_property
 from itertools import product
@@ -6,17 +7,19 @@ from pathlib import Path
 
 import py5
 
-IMAGES = sorted(list(Path("/home/bernardo/envs/sketches/be5/algorithms/tiles").glob("*.png")))
 UP, RIGHT, DOWN, LEFT = 0, 1, 2, 3
 
 @dataclass
 class Tile:
-    filename: Path
     edges: list
+    filename: Path = ""
+    p5_image: py5.Image = None
 
     @cached_property
     def image(self):
-        return py5.load_image(str(self.filename.resolve()))
+        if not self.p5_image:
+            self.p5_image = py5.load_image(str(self.filename.resolve()))
+        return self.p5_image
 
     @property
     def up(self):
@@ -33,6 +36,26 @@ class Tile:
     @property
     def right(self):
         return self.edges[RIGHT]
+
+    def rotate(self, counter):
+        """
+        Rotate the image and edges by counter times and return an equivalent new Tile
+        """
+        w = self.image.width
+        h = self.image.height
+
+        new_image = py5.create_graphics(w, h)
+        new_image.begin_draw()
+        new_image.image_mode(py5.CENTER)
+        new_image.translate(w // 2, h // 2)
+        new_image.rotate(py5.HALF_PI * counter)
+        new_image.image(self.image, 0, 0)
+        new_image.end_draw()
+
+        edges = deque(self.edges)
+        edges.rotate(counter)
+
+        return Tile(p5_image=new_image, edges=edges)
 @dataclass
 class Cell:
     i: int
@@ -128,14 +151,20 @@ grid = None
 def setup():
     global grid
     py5.size(800, 800)
+
+    images_dir = Path.home() / "envs" / "sketches" / "be5" / "algorithms" / "tiles" / "demo"
+    blank = Tile(filename=images_dir / "0.png", edges=[0, 0, 0, 0])
+    ptr_1 = Tile(filename=images_dir / "1.png", edges=[0, 1, 1, 1])
+    ptr_2 = Tile(filename=images_dir / "2.png", edges=[0, 1, 0, 1])
+
     tiles = [
-        Tile(filename=IMAGES[0], edges=[0, 0, 0, 0]),  # blank
-        Tile(filename=IMAGES[1], edges=[0, 1, 1, 1]),  # down
-        Tile(filename=IMAGES[2], edges=[1, 0, 1, 1]),  # left
-        Tile(filename=IMAGES[3], edges=[1, 1, 1, 0]),  # right
-        Tile(filename=IMAGES[4], edges=[1, 1, 0, 1]),  # up
-        Tile(filename=IMAGES[5], edges=[0, 1, 0, 1]),  # horizontal
-        Tile(filename=IMAGES[6], edges=[1, 0, 1, 0]),  # vertical
+        blank,
+        ptr_1,
+        ptr_1.rotate(1),
+        ptr_1.rotate(2),
+        ptr_1.rotate(3),
+        ptr_2,
+        ptr_2.rotate(1),
     ]
     grid = WaveFunctionCollapseGrid(dim=20, tiles=tiles)
     grid.start()
