@@ -9,9 +9,9 @@ import cv2
 import py5
 
 # IMAGE_NAME = "bernardo-carnaval.jpeg"
-IMAGE_NAME = "0002.jpg"
-NUM_WALKERS = 300
-OFFSET = 40
+IMAGE_NAME = "0005.jpg"
+NUM_WALKERS = 350
+OFFSET = 50
 STROKE_WEIGHT = 1.5
 BACKGROUND = (40, )
 ALPHA = 205
