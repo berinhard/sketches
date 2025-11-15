@@ -15,3 +15,7 @@ __pycache__
 
 s_*/cover0*
 projs
+
+s_*/*.jpg
+s_*/*.jpeg
+s_*/out_*
